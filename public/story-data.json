@@ -1,18 +1,58 @@
-[
-    {
+{
+    "start": {
         "title": "A Danish Boy In Theresienstadt:",
         "subtitle": "A Drawn Testimony",
-        "text": "On October 2, 1943, eight-year-old Steen Metz and his parents were arrested in their home in Odense, Denmark, and deported to Theresienstadt Concentration Camp. What followed were eighteen months of hunger, brutality, and loss—including the death of his father from starvation. Of the 15,000 children who passed through Theresienstadt, fewer than 1,500 survived. Steen was one of them. For decades, like many Holocaust survivors, Steen kept his experiences private. But in 2011, he was ready to share his story through his memoir, A Danish Boy in Theresienstadt. Now, we retell Steen's journey through an interactive visual experience, where hand-drawn illustrations guide you through his memories. This isn't just a story to read—it's a story to witness, to explore, and to remember.",
+        "text": "On October 2, 1943, eight-year-old Steen Metz and his parents were arrested in their home in Odense, Denmark, and deported to Theresienstadt Concentration Camp.\nWhat followed were eighteen months of hunger, brutality, and loss—including the death of his father from starvation. Of the 15,000 children who passed through Theresienstadt, fewer than 1,500 survived. Steen was one of them. For decades, like many Holocaust survivors, Steen kept his experiences private. But in 2011, he was ready to share his story through his memoir, A Danish Boy in Theresienstadt.\nNow, we retell Steen's journey through an interactive visual experience, where hand-drawn illustrations guide you through his memories. This isn't just a story to read—it's a story to witness, to explore, and to remember.",
         "location": "Odense, Denmark",
-        "time": "1943",
-        "svgElement": "start"
+        "time": "1943"
     },
-    {
-        "title": "Please add title",
-        "subtitle": "Please add subtitle",
-        "text": "Please add text",
-        "location": "Please add location",
-        "time": "Please add time",
-        "svgElement": "steenmetzportrait_x5F_group"
+    "cattlecar_x5F_group": {
+        "title": "Transport to Theresienstadt",
+        "subtitle": "A Three-Day Journey",
+        "text": "After their arrest, Steen and his parents were loaded into a crowded cattle car. Historians often use the term boxcar, but as Steen notes, survivors frequently call it a cattle car, because that is what it was. He recalls the horrible smell, a result of having no bathroom facilities. The door was locked from the outside, and there was only one stop, during which they received a small amount of water.\n\nSteen and his parents spent three days in complete uncertainty and darkness. There were four children, including Steen, who were able to lie down in the car. The adults had to alternate between sitting and standing. Steen remembers the frightened faces around him; no one knew what was going to happen.",
+        "location": "Theresienstadt, Czechoslovakia",
+        "time": "2 October 1943"
+    },
+    "roof_x5F_group": {
+        "title": "Transport to Theresienstadt",
+        "subtitle": "A Three-Day Journey",
+        "text": "There was no train station in Theresienstadt. Instead, Steen and his family were transported to the station Bauschowitz-Theresienstadt, known today as Bohušovice train station. From here, after their long journey, they had to walk one and a half miles to Theresienstadt.\n\nUpon arrival, they had to hand over their valuable items, including the jewellery and money they had been encouraged to bring. Steen’s mother was allowed to keep her wedding ring only because the Nazis were unable to remove it from her finger. Although new prisoners were split into groups of women, men, and children after their arrival, Steen was able to stay with his mother in Theresienstadt.",
+        "location": "Theresienstadt, Czechoslovakia",
+        "time": "5 October 1943"
+    },
+    "ball_x5F_group": {
+        "title": "Life in Theresienstadt",
+        "subtitle": "Playing Soccer",
+        "text": "There was no goal post, no soccer field, no soccer ball. Instead, Steen and his Czech friends played on a gravel field, and his mother made a ball out of old rags – one that did not last long.",
+        "location": "Theresienstadt, Czechoslovakia",
+        "time": "1943-1945"
+    },
+    "steenmetz_x5F_group": {
+        "title": "Life in Theresienstadt",
+        "subtitle": "Playing Soccer",
+        "text": "Besides lining up for food and doing voluntary work, Steen played soccer with some of the Czech children in Theresienstadt. To communicate with them, he learned Czech phonetically. Steen recalls that these were the only moments where he felt closest to being a nine-year-old.",
+        "location": "Theresienstadt, Czechoslovakia",
+        "time": "1943-1945"
+    },
+    "friends_x5F_group": {
+        "title": "Life in Theresienstadt",
+        "subtitle": "Playing Soccer",
+        "text": "One day, when Steen went to the gravel field where they played soccer, his Czech friends did not show up. Steen wondered what was going on and why they did not come. His mother comforted him; she knew what had happened but protected him from the truth. The children had been transported to extermination camps.",
+        "location": "Theresienstadt, Czechoslovakia",
+        "time": "1943-1945"
+    },
+    "whitebus_x5F_group": {
+        "title": "Happier Times",
+        "subtitle": "Liberation by the White Busses",
+        "text": "On April 13th, 1945, a few weeks before the end of the wars, the prisoners in Theresienstadt heard rumours that the White Busses were on their way from Sweden to liberate the Danish Jews. Although Sweden was a neutral country, the White Busses arrived safely in Theresienstadt two days later, on the 15th of April. It was a miracle that the White Busses had been able to move through Germany safely to rescue approximately 425 surviving Danish Jews.\n\nBefore their departure, eight young Danish men married women from other countries so they could also be liberated. Among the liberated Jews, there were four babies that were born in secrecy. On the way back, the White Busses had to make several stops. Steen still remembers the bombardments and the faces of young soldiers along the way.",
+        "location": "Theresienstadt, Czechoslovakia",
+        "time": "15 April 1945"
+    },
+    "crowd_x5F_group": {
+        "title": "Happier Times",
+        "subtitle": "Liberation by the White Busses",
+        "text": "Even though Denmark was still occupied when the White Busses reached the border on the 17th of April, the rescued Jews were greeted with flowers, candy, snacks, and sandwiches. The White Busses travelled on to Sweden, where the liberated prisoners had to spent about eight days in quarantine.\n\nOn May 5th, 1945, only two weeks after their arrival in Sweden, the war ends, and Denmark is liberated. Known today in Denmark as Liberation Day, this historic day coincided with Steen’s 10th birthday. Steen and his mother stayed in Sweden for a few weeks before moving back to Odense in early June. After his return, Steen recalls telling his friends from school that they had raised the Danish flags for his birthday.",
+        "location": "Denmark",
+        "time": "17 April 1945"
     }
-]
+}

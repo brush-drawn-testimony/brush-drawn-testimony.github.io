@@ -1,7 +1,9 @@
 "use client";
 
-import { useEffect, useRef, useState } from "react";
+import { useCallback, useEffect, useRef, useState } from "react";
 import SVG from "react-inlinesvg";
+import { useDispatch } from "react-redux";
+import { setSelectedGroup } from "../../../store/appSlice";
 // import MySVG from "../../../public/assets/6000px Ervin Abadi Perpective view B-B all duplicated layers 2.svg";
 // import explorationDataEn from "../locales/en/translation.json";
 // import { PaintingContext } from "./painting.context";
@@ -70,6 +72,8 @@ export default function Painting(props: PaintingProps) {
     return <div>No SVG path.</div>;
   }
 
+  const dispatch = useDispatch();
+
   /* const [MySVG, setMySVG] = useState(null);
 
   useEffect(() => {
@@ -123,10 +127,7 @@ export default function Painting(props: PaintingProps) {
 
   const resetView = () => {
     if (svgRef.current != null) {
-      const elems = document.querySelectorAll(".highlighted");
-      [].forEach.call(elems, function (el) {
-        (el as HTMLElement).classList.remove("highlighted");
-      });
+      resetSelectedElements();
 
       const rec = (svgRef.current as SVGGraphicsElement).querySelector(
         "#viewbox-rect"
@@ -148,18 +149,18 @@ export default function Painting(props: PaintingProps) {
     }
   };
 
-  // const startBlinking = () => {
-  //   const elems = document.querySelectorAll(".cls-2");
+  /*   const startBlinking = () => {
+    const elems = document.querySelectorAll(".myPath");
 
-  //   elems.forEach((el, index) => {
-  //     setTimeout(() => {
-  //       (el as HTMLElement).classList.add("fade-stroke-animation");
-  //       setTimeout(() => {
-  //         (el as HTMLElement).classList.remove("fade-stroke-animation");
-  //       }, 1999);
-  //     }, index * 2000);
-  //   });
-  // };
+    elems.forEach((el, index) => {
+      setTimeout(() => {
+        (el as HTMLElement).classList.add("fade-stroke-animation");
+        setTimeout(() => {
+          (el as HTMLElement).classList.remove("fade-stroke-animation");
+        }, 1999);
+      }, index * 2000);
+    });
+  }; */
 
   const blinkStrokes = () => {
     const elems = document.querySelectorAll(".myPath");
@@ -213,6 +214,22 @@ export default function Painting(props: PaintingProps) {
     requestAnimationFrame(animateStep);
   };
 
+  const resetSelectedElements = useCallback(() => {
+    const svg = svgRef.current as SVGSVGElement | null;
+    if (svg == null) {
+      dispatch(setSelectedGroup(null));
+      return;
+    }
+
+    const selected = svg.querySelectorAll(".selected");
+
+    selected.forEach((element) => {
+      (element as SVGSVGElement).classList.remove("selected");
+    });
+
+    dispatch(setSelectedGroup(null));
+  }, [dispatch]);
+
   // useEffect(() => {
   //   if (svgRef.current) {
   //     const circleElements = (svgRef.current as SVGSVGElement).querySelectorAll(
@@ -232,9 +249,14 @@ export default function Painting(props: PaintingProps) {
   const clickHandler = (e: Event) => {
     e.stopImmediatePropagation();
     if (e.target != null) {
+      resetSelectedElements();
+
       const clickedID = (e.target as HTMLElement).id;
-      const groupID = ((e.target as HTMLElement).parentElement as HTMLElement)
-        .id;
+      const pathGroup = (e.target as HTMLElement).parentElement as HTMLElement;
+      const group = pathGroup.parentElement as HTMLElement;
+      pathGroup.classList.add("selected");
+
+      dispatch(setSelectedGroup(group.id));
 
       zoomToElement(clickedID);
     }
@@ -410,7 +432,8 @@ export default function Painting(props: PaintingProps) {
           className="size-full flex justify-center resize-none relative"
           onClick={(e) => {
             resetView();
-            // blinkStrokes();
+            // startBlinking();
+            blinkStrokes();
           }}
           ref={svgRef}
         >
