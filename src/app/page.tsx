@@ -20,7 +20,7 @@ const noto_serif = Noto_Serif({ weight: "400", subsets: ["latin"] });
 const paintings = [
   { key: "start", svgFile: "/images/new/Title page-1.svg" },
   { key: "young", svgFile: "/images/new/Young Steen-1.svg" },
-  { key: "transport", svgFile: "/images/new/Transport scene-1.svg" },
+  { key: "transport", svgFile: "/images/new/Transport scene-2.svg" },
   { key: "soccer", svgFile: "/images/new/Soccer scene-1.svg" },
   { key: "whitebus", svgFile: "/images/new/White Buses scene-1.svg" },
 ];
