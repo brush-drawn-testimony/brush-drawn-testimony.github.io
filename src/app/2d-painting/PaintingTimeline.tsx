@@ -1,12 +1,13 @@
 "use client";
-import { useMemo } from "react";
+import { useMemo, useState } from "react";
 import SVG from "react-inlinesvg";
 import Image from "next/image";
 import { useDispatch, useSelector } from "react-redux";
 import { State } from "../../../store/store";
-import { setSelectedPainting } from "../../../store/appSlice";
+import { setSelectedGroup, setSelectedPainting } from "../../../store/appSlice";
 import { ChevronLeftIcon, ChevronRightIcon } from "@heroicons/react/24/solid";
 import { StoryEntry } from "../page";
+import { ThumbnailPainting } from "./ThumbnailPainting";
 
 export interface PaintingTimelineProps {
   paintings: Array<any>;
@@ -19,6 +20,10 @@ export function PaintingTimeline(props: PaintingTimelineProps) {
   const selectedPainting = useSelector(
     (state: State) => state.app.selectedPainting
   );
+
+  const [interactiveElements, setInteractiveElements] = useState<
+    Record<string, Array<string>>
+  >({});
 
   return (
     <div className="size-full items-center grid grid-cols-[64px_auto_64px] gap-2 border-t border-gray-300 relative">
@@ -48,7 +53,7 @@ export function PaintingTimeline(props: PaintingTimelineProps) {
           return (
             <>
               <div className="text-xs row-start-1 py-1">{story?.title}</div>
-              <div className="relative items-center justify-between flex pr-5 row-start-2">
+              <div className="relative items-center justify-between flex pr-1 row-start-2">
                 <div className="absolute top-0 left-0 w-full h-full flex items-center">
                   <div
                     className={`h-1 mt-[4px] w-full ${
@@ -58,10 +63,11 @@ export function PaintingTimeline(props: PaintingTimelineProps) {
                 </div>
                 <div
                   className={`size-18 rounded-full overflow-hidden bg-slate-50 relative cursor-pointer shadow-md items-center ${
-                    selectedPainting === i ? "border-2 border-gray-400" : ""
+                    selectedPainting === i ? "border-3 border-gray-400" : ""
                   }`}
                   key={`timeline-entry-${i}`}
                   onClick={() => {
+                    dispatch(setSelectedGroup(null));
                     dispatch(setSelectedPainting(i));
                   }}
                 >
@@ -72,28 +78,24 @@ export function PaintingTimeline(props: PaintingTimelineProps) {
                     //   backgroundImage: "url('/assets/paper-texture.jpg')",
                     // }}
                     preProcessor={(code) => {
+                      const tmpInteractiveElements = { ...interactiveElements };
+                      const tmpIE = [];
+                      for (const element of Object.keys(storyData)) {
+                        if (code.includes(element)) {
+                          tmpIE.push(element);
+                        }
+                      }
+                      tmpInteractiveElements[i.toString()] = tmpIE;
+                      setInteractiveElements(tmpInteractiveElements);
                       return code.replaceAll('id="', 'id="timeline-');
                     }}
                   />
                 </div>
-                {selectedPainting === i && (
-                  <>
-                    <div
-                      className={`size-12 rounded-full overflow-hidden bg-slate-50 relative cursor-pointer shadow-md items-center`}
-                      key={`timeline-sub-entry-${i}`}
-                      onClick={() => {
-                        dispatch(setSelectedPainting(i));
-                      }}
-                    ></div>
-                    <div
-                      className={`size-12 rounded-full overflow-hidden bg-slate-50 relative cursor-pointer shadow-md items-center`}
-                      key={`timeline-sub-entry-${i}-2`}
-                      onClick={() => {
-                        dispatch(setSelectedPainting(i));
-                      }}
-                    ></div>
-                  </>
-                )}
+                {selectedPainting === i &&
+                  interactiveElements[i.toString()] != null &&
+                  interactiveElements[i.toString()].map((ie) => (
+                    <ThumbnailPainting elementID={ie} svgFile={e.svgFile} />
+                  ))}
               </div>
               <div className="text-xs row-start-3 py-1">{story?.time}</div>
             </>

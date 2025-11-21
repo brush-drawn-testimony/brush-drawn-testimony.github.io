@@ -2,8 +2,10 @@
 
 import { useCallback, useEffect, useRef, useState } from "react";
 import SVG from "react-inlinesvg";
-import { useDispatch } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import { setSelectedGroup } from "../../../store/appSlice";
+import { nanoid } from "@reduxjs/toolkit";
+import { State } from "../../../store/store";
 // import MySVG from "../../../public/assets/6000px Ervin Abadi Perpective view B-B all duplicated layers 2.svg";
 // import explorationDataEn from "../locales/en/translation.json";
 // import { PaintingContext } from "./painting.context";
@@ -113,7 +115,7 @@ export default function Painting(props: PaintingProps) {
         (element as HTMLElement).classList.add("highlighted");
         const bbox = (element as SVGGraphicsElement).getBBox();
         const padding =
-          (parseInt(svg.getAttribute("width") as string) / 200) * 15;
+          (parseInt(svg.getAttribute("width") as string) / 200) * 10;
 
         const x = bbox.x - padding;
         const y = bbox.y - padding;
@@ -246,19 +248,37 @@ export default function Painting(props: PaintingProps) {
   //       document.querySelectorAll(".cls-2").length * 2000
   //     );*/
 
+  function setHiddenImages(group: SVGElement, hidden: boolean) {
+    const images = group.querySelectorAll("image");
+    images.forEach((element) => {
+      if ((element as SVGImageElement).id.includes("hidden")) {
+        if (hidden) {
+          (element as SVGImageElement).classList.add("hidden");
+        } else {
+          (element as SVGImageElement).classList.remove("hidden");
+        }
+      }
+    });
+  }
+
+  function clickInteractiveElement(e) {
+    resetSelectedElements();
+
+    const element = e as HTMLElement;
+    const clickedID = (e as HTMLElement).id;
+    const pathGroup = (e as HTMLElement).parentElement as HTMLElement;
+    const group = pathGroup.parentElement as HTMLElement;
+    pathGroup.classList.add("selected");
+
+    setHiddenImages(group as unknown as SVGElement, false);
+    dispatch(setSelectedGroup(group.id));
+    zoomToElement(clickedID);
+  }
+
   const clickHandler = (e: Event) => {
     e.stopImmediatePropagation();
     if (e.target != null) {
-      resetSelectedElements();
-
-      const clickedID = (e.target as HTMLElement).id;
-      const pathGroup = (e.target as HTMLElement).parentElement as HTMLElement;
-      const group = pathGroup.parentElement as HTMLElement;
-      pathGroup.classList.add("selected");
-
-      dispatch(setSelectedGroup(group.id));
-
-      zoomToElement(clickedID);
+      clickInteractiveElement(e.target);
     }
   };
 
@@ -407,23 +427,36 @@ export default function Painting(props: PaintingProps) {
 
   useEffect(() => {
     if (svgRef.current != null) {
+      setHiddenImages(svgRef.current as SVGSVGElement, true);
+
       const paths = (svgRef.current as SVGSVGElement).querySelectorAll("path");
       paths.forEach((element) => {
+        if (element.id != null) {
+          element.id = nanoid(4);
+        }
         element.classList.add("myPath");
         element.addEventListener("click", clickHandler);
       });
 
       resetView();
-
-      // return () => {
-      //   if (paths) {
-      //     paths.forEach((element) => {
-      //       element.removeEventListener("click", clickHandler);
-      //     });
-      //   }
-      // };
     }
   }, [svgRef.current, loaded]);
+
+  const selectedGroup = useSelector((state: State) => state.app.selectedGroup);
+
+  useEffect(() => {
+    if (svgRef.current != null) {
+      const svg = svgRef.current as SVGSVGElement;
+      if (svg != null && selectedGroup != null) {
+        const toBeClicked = svg
+          .querySelector(`#${selectedGroup}`)
+          ?.querySelector("path");
+        if (toBeClicked != null) clickInteractiveElement(toBeClicked);
+      } else {
+        resetView();
+      }
+    }
+  }, [selectedGroup]);
 
   return (
     <div className="size-full grid grid-cols-1 grid-rows-1 relative">
@@ -432,7 +465,9 @@ export default function Painting(props: PaintingProps) {
           className="size-full flex justify-center resize-none relative"
           onClick={(e) => {
             resetView();
-            // startBlinking();
+            if (svgRef.current != null) {
+              setHiddenImages(svgRef.current as SVGSVGElement, true);
+            }
             blinkStrokes();
           }}
           ref={svgRef}
