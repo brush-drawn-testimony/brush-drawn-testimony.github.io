@@ -8,7 +8,7 @@
     },
     "transport": {
         "title": "Transport to Theresienstadt",
-        "subtitle": "A Three-Journey",
+        "subtitle": "A Three-Day Journey",
         "text": "After Steen and his parents were arrested they were loaded onto a cattle car and transported to Theresienstadt. Click on the interactive objects to find out more.",
         "location": "Theresienstadt, Czechoslovakia",
         "time": "2 October 1943"
@@ -32,28 +32,28 @@
         "subtitle": "Life in Theresienstadt",
         "text": "Steen was only nine years old when he was in Theresienstadt. As a young boy, he spent his time delivering messages in the camp and playing soccer with the other children. Click on the interactive objects to find out more.",
         "location": "Theresienstadt, Czechoslovakia",
-        "time": "1943-1945"
+        "time": "1943 - 1945"
     },
     "ball_x5F_group": {
         "title": "The Soccer Field",
         "subtitle": "Playing Soccer",
         "text": "There was no goal post, no soccer field, no soccer ball. Instead, Steen and his Czech friends played on a gravel field, and his mother made a ball out of old rags – one that did not last long.",
         "location": "Theresienstadt, Czechoslovakia",
-        "time": "1943-1945"
+        "time": "1943 - 1945"
     },
     "steenmetz_x5F_group": {
         "title": "Friendships in Theresienstadt",
         "subtitle": "Playing Soccer",
         "text": "Besides lining up for food and doing voluntary work, Steen played soccer with some of the Czech children in Theresienstadt. To communicate with them, he learned Czech phonetically. Steen recalls that these were the only moments where he felt closest to being a nine-year-old.",
         "location": "Theresienstadt, Czechoslovakia",
-        "time": "1943-1945"
+        "time": "1943 - 1945"
     },
     "friends_x5F_group": {
         "title": "Friendships in Theresienstadt",
         "subtitle": "Playing Soccer",
         "text": "One day, when Steen went to the gravel field where they played soccer, his Czech friends did not show up. Steen wondered what was going on and why they did not come. His mother comforted him; she knew what had happened but protected him from the truth. The children had been transported to extermination camps.",
         "location": "Theresienstadt, Czechoslovakia",
-        "time": "1943-1945"
+        "time": "1943 - 1945"
     },
     "whitebus": {
         "title": "Happier Times",
@@ -75,5 +75,20 @@
         "text": "Even though Denmark was still occupied when the White Busses reached the border on the 17th of April, the rescued Jews were greeted with flowers, candy, snacks, and sandwiches. The White Busses travelled on to Sweden, where the liberated prisoners had to spent about eight days in quarantine.\n\nOn May 5th, 1945, only two weeks after their arrival in Sweden, the war ends, and Denmark is liberated. Known today in Denmark as Liberation Day, this historic day coincided with Steen’s 10th birthday. Steen and his mother stayed in Sweden for a few weeks before moving back to Odense in early June. After his return, Steen recalls telling his friends from school that they had raised the Danish flags for his birthday.",
         "location": "Denmark",
         "time": "17 April 1945"
+    },
+    "modelcamp": {
+        "title": "The Beautification Program",
+        "subtitle": "A Major Deception",
+        "text": null,
+        "location": "Theresienstadt, Czechoslovakia",
+        "time": "February 1944 - June 1944"
+    },
+    "pavillion_x5F_group": {
+        "title": "A Visit from the Danish Delegation",
+        "subtitle": "The Beautification Program",
+        "text": null,
+        "location": "Theresienstadt, Czechoslovakia",
+        "time": "February 1944 - June 1944"
     }
+    
 }
