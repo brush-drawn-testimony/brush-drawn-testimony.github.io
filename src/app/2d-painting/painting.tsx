@@ -262,11 +262,11 @@ export default function Painting(props: PaintingProps) {
     });
   }
 
-  function setupShadowlessImages(group: SVGElement) {
-    const images = group.querySelectorAll("image");
-    images.forEach((element) => {
-      if ((element as SVGImageElement).id.includes("shadowless")) {
-        (element as SVGImageElement).classList.add("shadowless");
+  function setupShadowlessElements(group: SVGElement) {
+    const elements = group.querySelectorAll("*");
+    elements.forEach((element) => {
+      if ((element as SVGElement).id.includes("shadowless")) {
+        (element as SVGElement).classList.add("shadowless");
       }
     });
   }
@@ -279,7 +279,7 @@ export default function Painting(props: PaintingProps) {
     const group = pathGroup.parentElement as HTMLElement;
     group.classList.add("selected");
 
-    setupShadowlessImages(group as unknown as SVGAElement)
+    setupShadowlessElements(group as unknown as SVGElement);
     setHiddenImages(group as unknown as SVGElement, false);
     dispatch(setSelectedGroup(group.id));
     zoomToElement(clickedID);
