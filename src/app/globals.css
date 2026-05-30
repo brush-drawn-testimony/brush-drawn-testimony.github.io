@@ -148,6 +148,12 @@ input:checked + .slider:before {
     /* filter: url(#roughpaper); */
 }
 
+.painting-map,
+.painting-map .maplibregl-canvas-container,
+.painting-map .maplibregl-canvas {
+  background: transparent !important;
+}
+
 .scroll-downs {
   position: absolute;
   top: 0;

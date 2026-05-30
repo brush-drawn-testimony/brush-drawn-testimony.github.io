@@ -40,7 +40,12 @@
     "subtitle": "A Three-Day Journey",
     "text": "Following their arrest, Steen and his parents were loaded aboard a cattle car and transported to Theresienstadt. The journey lasted three days, during which the car remained locked from the outside and stopped only once, when a small amount of water was provided. Among the passengers were four children, including Steen, who were able to lie down. The adults had to alternate between sitting and standing.\n\nClick on the interactive objects to find out more.",
     "location": "Theresienstadt, Czechoslovakia",
-    "time": "2 October 1943"
+    "time": "2 October 1943",
+    "map": {
+      "title": "Test",
+      "start": { "lat": 50, "lon": 50 },
+      "end": { "lat": 20, "lon": 20 }
+    }
   },
   "cattlecar_x5F_group": {
     "title": "The Cattle Car",

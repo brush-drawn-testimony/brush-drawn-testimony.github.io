@@ -34,12 +34,9 @@ export function PaintingTimeline(props: PaintingTimelineProps) {
 
   useEffect(() => {
     if (svgRef.current != null) {
-      console.log("HERE", svgRef.current);
-
       const image = (svgRef.current as HTMLElement).querySelector(
         "#background"
       );
-      console.log("HERE IMAGE", image);
       // images.forEach((element) => {
       //   if (element.id != null) {
       //     console.log(element.id, element);
@@ -98,6 +95,7 @@ export function PaintingTimeline(props: PaintingTimelineProps) {
       >
         {paintings.map((e, i) => {
           const story = storyData ? storyData[e.key] ?? null : null;
+          console.log("test", story);
           return (
             <>
               <div
@@ -112,17 +110,15 @@ export function PaintingTimeline(props: PaintingTimelineProps) {
               >
                 <div className="absolute top-0 left-0 w-full h-full flex items-center">
                   <div
-                    className={`h-1 mt-[4px] w-full ${
-                      i < selectedPainting ? "bg-gray-400" : "bg-gray-200"
-                    }`}
+                    className={`h-1 mt-[4px] w-full ${i < selectedPainting ? "bg-gray-400" : "bg-gray-200"
+                      }`}
                   ></div>
                 </div>
                 <div
-                  className={`size-18 rounded-full overflow-hidden relative cursor-pointer shadow-md items-center bg-white ${
-                    selectedPainting === i && selectedGroup == null
-                      ? "border-3 border-gray-400"
-                      : ""
-                  }`}
+                  className={`size-18 rounded-full overflow-hidden relative cursor-pointer shadow-md items-center bg-white ${selectedPainting === i && selectedGroup == null
+                    ? "border-3 border-gray-400"
+                    : ""
+                    }`}
                   key={`timeline-entry-${i}`}
                   onClick={() => {
                     dispatch(setSelectedGroup(null));

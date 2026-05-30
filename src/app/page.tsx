@@ -9,6 +9,7 @@ import { State, store } from "../../store/store";
 import Painting from "./2d-painting/painting";
 import { PaintingTimeline } from "./2d-painting/PaintingTimeline";
 import { PaintingAudio } from "./2d-painting/PaintingAudio";
+import { PaintingMap } from "./map/PaintingMap";
 
 const reenie_beanie = Reenie_Beanie({ weight: "400", subsets: ["latin"] });
 const noto_serif = Noto_Serif({ weight: "400", subsets: ["latin"] });
@@ -29,6 +30,12 @@ const paintings = [
   { key: "whitebus", svgFile: "/images/White Buses scene-1.svg" },
 ];
 
+export interface MapEntry {
+  title: string;
+  start: { lat: number, lon: number };
+  end?: { lat: number, lon: number };
+}
+
 export interface StoryEntry {
   title: string;
   subtitle: string;
@@ -37,6 +44,7 @@ export interface StoryEntry {
   time: string;
   svgElement: string;
   audio?: string;
+  map?: MapEntry;
 }
 
 function MainMenu() {
@@ -50,6 +58,8 @@ function MainMenu() {
   const selectedGroup = useSelector((state: State) => state.app.selectedGroup);
 
   const [storyData, setStoryData] = useState<Record<string, StoryEntry>>();
+
+  console.log("GO", storyData);
 
   useEffect(() => {
     fetch("/story-data.json")
@@ -182,6 +192,10 @@ function MainMenu() {
                         <PaintingAudio src={`/audio/${story.audio}`} />
                       }
                     </div>
+                    {story.map && <div className="text-sm flex gap-1 m-1 flex-col h-[300px] w-full border border-gray-300 rounded-md">
+
+                      <PaintingMap start={story.map.start} end={story.map.end} />
+                    </div>}
                     {/* <div className="grid grid-cols-[auto_auto] items-center justify-center gap-2">
                     <CursorArrowRaysIcon
                       width={30}
