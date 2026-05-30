@@ -1,4 +1,4 @@
-import { useEffect, useRef, useState } from "react";
+import { ChangeEvent, useEffect, useRef, useState } from "react";
 
 interface PaintingAudioProps {
     src: string;
@@ -7,7 +7,7 @@ interface PaintingAudioProps {
 export function PaintingAudio(props: PaintingAudioProps) {
     const { src } = props;
 
-    const audioRef = useRef();
+    const audioRef = useRef<HTMLAudioElement>(null);
 
     const [isPlaying, setIsPlaying] = useState(false);
     const [currentTime, setCurrentTime] = useState(0);
@@ -26,26 +26,30 @@ export function PaintingAudio(props: PaintingAudioProps) {
     };
 
     const handleTimeUpdate = () => {
+        if (!audioRef.current) return;
         setCurrentTime(audioRef.current.currentTime);
     };
 
     const handleLoadedMetadata = () => {
+        if (!audioRef.current) return;
         setDuration(audioRef.current.duration);
     };
 
-    const handleSeek = (e) => {
+    const handleSeek = (e: ChangeEvent<HTMLInputElement>) => {
         const newTime = Number(e.target.value);
+        if (!audioRef.current) return;
         audioRef.current.currentTime = newTime;
         setCurrentTime(newTime);
     };
 
-    const handleVolumeChange = (e) => {
+    const handleVolumeChange = (e: ChangeEvent<HTMLInputElement>) => {
         const newVolume = Number(e.target.value);
+        if (!audioRef.current) return;
         audioRef.current.volume = newVolume;
         setVolume(newVolume);
     };
 
-    const formatTime = (time) => {
+    const formatTime = (time: number) => {
         if (!time || Number.isNaN(time)) return "0:00";
 
         const minutes = Math.floor(time / 60);
@@ -195,4 +199,3 @@ function SpeakerIcon(props: SpeackerProps) {
         </svg>
     );
 }
-
