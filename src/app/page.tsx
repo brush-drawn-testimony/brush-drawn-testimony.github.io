@@ -32,8 +32,8 @@ const paintings = [
 
 export interface MapEntry {
   title: string;
-  start: { lat: number, lon: number };
-  end?: { lat: number, lon: number };
+  start: { lat: number, lon: number, title: string };
+  end?: { lat: number, lon: number, title: string };
 }
 
 export interface StoryEntry {
@@ -58,8 +58,6 @@ function MainMenu() {
   const selectedGroup = useSelector((state: State) => state.app.selectedGroup);
 
   const [storyData, setStoryData] = useState<Record<string, StoryEntry>>();
-
-  console.log("GO", storyData);
 
   useEffect(() => {
     fetch("/story-data.json")
@@ -131,7 +129,7 @@ function MainMenu() {
           <div className="size-full absolute top-0 left-0">
             {storyData != null && (
               <div className="size-full text-gray-950 relative">
-                <svg className="size-full absolute top-0 left-0">
+                <svg className="size-full absolute top-0 left-0 z-50">
                   <filter id="roughpaper-sidebar">
                     <feTurbulence
                       type="fractalNoise"
@@ -192,9 +190,13 @@ function MainMenu() {
                         <PaintingAudio src={`/audio/${story.audio}`} />
                       }
                     </div>
-                    {story.map && <div className="text-sm flex gap-1 m-1 flex-col h-[300px] w-full border border-gray-300 rounded-md">
-
-                      <PaintingMap start={story.map.start} end={story.map.end} />
+                    {story.map && <div className="text-sm flex gap-1 flex-col ">
+                      <div className="h-[300px] w-full border-2 border-gray-300 rounded-md opacity-90">
+                        <PaintingMap start={story.map.start} end={story.map.end} />
+                      </div>
+                      <div className="opacity-75">
+                        {story.map.title && <span>{story.map.title}</span>}
+                      </div>
                     </div>}
                     {/* <div className="grid grid-cols-[auto_auto] items-center justify-center gap-2">
                     <CursorArrowRaysIcon

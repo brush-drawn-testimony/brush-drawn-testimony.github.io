@@ -42,9 +42,15 @@
     "location": "Theresienstadt, Czechoslovakia",
     "time": "2 October 1943",
     "map": {
-      "title": "Test",
-      "start": { "lat": 50, "lon": 50 },
-      "end": { "lat": 20, "lon": 20 }
+      "title": "From Odense to Theresienstadt",
+      "start": {
+        "lat": 55.381537446534686,
+        "lon": 10.395795592972672
+      },
+      "end": {
+        "lat": 50.51061972769558,
+        "lon": 14.149830134701624
+      }
     }
   },
   "cattlecar_x5F_group": {
