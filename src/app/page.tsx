@@ -129,31 +129,6 @@ function MainMenu() {
           <div className="size-full absolute top-0 left-0">
             {storyData != null && (
               <div className="size-full text-gray-950 relative">
-                <svg className="size-full absolute top-0 left-0 z-50">
-                  <filter id="roughpaper-sidebar">
-                    <feTurbulence
-                      type="fractalNoise"
-                      baseFrequency="0.04"
-                      result="noise"
-                      numOctaves="5"
-                    />
-
-                    <feDiffuseLighting
-                      in="noise"
-                      lightingColor="#fff"
-                      surfaceScale="2"
-                    >
-                      <feDistantLight azimuth="45" elevation="60" />
-                    </feDiffuseLighting>
-                  </filter>
-                  <rect
-                    width={"100%"}
-                    height={"100%"}
-                    filter="url(#roughpaper-sidebar)"
-                    opacity={0.3}
-                    fill="white"
-                  />
-                </svg>
                 <div className="absolute top-0 left-0 size-full overflow-hidden overflow-y-scroll flex items-center">
                   <div className="size-full flex gap-2 flex-col p-3 px-6 justify-center">
                     <div className={`text-xl ${noto_serif.className}`}>
@@ -190,7 +165,7 @@ function MainMenu() {
                         <PaintingAudio src={`/audio/${story.audio}`} />
                       }
                     </div>
-                    {story.map && <div className="text-sm flex gap-1 flex-col ">
+                    {story.map && <div className="text-sm flex gap-1 flex-col z-0">
                       <div className="h-[300px] w-full border-2 border-gray-300 rounded-md opacity-90">
                         <PaintingMap start={story.map.start} end={story.map.end} />
                       </div>
@@ -208,6 +183,31 @@ function MainMenu() {
                   </div> */}
                   </div>
                 </div>
+                <svg className="size-full absolute top-0 left-0">
+                  <filter id="roughpaper-sidebar">
+                    <feTurbulence
+                      type="fractalNoise"
+                      baseFrequency="0.04"
+                      result="noise"
+                      numOctaves="5"
+                    />
+
+                    <feDiffuseLighting
+                      in="noise"
+                      lightingColor="#fff"
+                      surfaceScale="2"
+                    >
+                      <feDistantLight azimuth="45" elevation="60" />
+                    </feDiffuseLighting>
+                  </filter>
+                  <rect
+                    width={"100%"}
+                    height={"100%"}
+                    filter="url(#roughpaper-sidebar)"
+                    opacity={0.3}
+                    fill="white"
+                  />
+                </svg>
               </div>
             )}
           </div>
