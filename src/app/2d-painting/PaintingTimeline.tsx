@@ -13,6 +13,13 @@ import { Noto_Serif, Reenie_Beanie } from "next/font/google";
 const noto_serif = Noto_Serif({ weight: "400", subsets: ["latin"] });
 const reenie_beanie = Reenie_Beanie({ weight: "400", subsets: ["latin"] });
 
+function sameElements(left: Array<string> = [], right: Array<string> = []) {
+  return (
+    left.length === right.length &&
+    left.every((value, index) => value === right[index])
+  );
+}
+
 export interface PaintingTimelineProps {
   paintings: Array<any>;
   storyData: Record<string, StoryEntry>;
@@ -95,7 +102,6 @@ export function PaintingTimeline(props: PaintingTimelineProps) {
       >
         {paintings.map((e, i) => {
           const story = storyData ? storyData[e.key] ?? null : null;
-          console.log("test", story);
           return (
             <>
               <div
@@ -133,15 +139,26 @@ export function PaintingTimeline(props: PaintingTimelineProps) {
                     //   backgroundImage: "url('/assets/paper-texture.jpg')",
                     // }}
                     preProcessor={(code) => {
-                      const tmpInteractiveElements = { ...interactiveElements };
-                      const tmpIE = [];
-                      for (const element of Object.keys(storyData)) {
-                        if (code.includes(element)) {
-                          tmpIE.push(element);
+                      const timelineKey = i.toString();
+                      const discoveredElements = Object.keys(storyData).filter(
+                        (element) => code.includes(`id="${element}"`)
+                      );
+
+                      setInteractiveElements((currentElements) => {
+                        if (
+                          sameElements(
+                            currentElements[timelineKey],
+                            discoveredElements
+                          )
+                        ) {
+                          return currentElements;
                         }
-                      }
-                      tmpInteractiveElements[i.toString()] = tmpIE;
-                      setInteractiveElements(tmpInteractiveElements);
+
+                        return {
+                          ...currentElements,
+                          [timelineKey]: discoveredElements,
+                        };
+                      });
 
                       let newCode = code.replaceAll(
                         '_image"',

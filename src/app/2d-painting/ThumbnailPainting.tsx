@@ -27,9 +27,17 @@ export function ThumbnailPainting(props: ThumbnailPaintingProps) {
         const group = originalSvg?.querySelector(`#${elementID}`) ?? null;
 
         if (group != null) {
-          const image = (group as SVGElement).querySelector("image");
-          if (image != null) {
-            setImage(image.getAttribute("xlink:href"));
+          const images = Array.from(
+            (group as SVGElement).querySelectorAll("image")
+          );
+          const image =
+            images.find((image) => image.id.toLowerCase().includes("hidden")) ??
+            images[0];
+          const href =
+            image?.getAttribute("href") ?? image?.getAttribute("xlink:href");
+
+          if (href != null) {
+            setImage(href);
           }
         }
       });

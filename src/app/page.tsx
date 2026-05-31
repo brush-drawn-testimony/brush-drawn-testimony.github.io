@@ -45,7 +45,7 @@ function renderStoryParagraph(text: string, paragraphIndex: number) {
       <div className="w-full flex flex-row gap-3">
         {getSteenPortrait()}
         <span className="italic" key={`story-quote-${paragraphIndex}-${match.index}`}>
-          {match[1]}
+          "{match[1]}"
         </span>
       </div>
     );
