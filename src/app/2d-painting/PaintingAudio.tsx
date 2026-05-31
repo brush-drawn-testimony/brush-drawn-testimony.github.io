@@ -4,6 +4,16 @@ interface PaintingAudioProps {
     src: string;
 }
 
+export function getSteenPortrait() {
+    return <div className="h-20 w-20 p-2 shrink-0 overflow-hidden rounded-full border-2 border-gray-300">
+        <img
+            src='/images/steen.png'
+            alt=""
+            className="h-full w-full object-cover"
+        />
+    </div>
+}
+
 export function PaintingAudio(props: PaintingAudioProps) {
     const { src } = props;
 
@@ -93,13 +103,7 @@ export function PaintingAudio(props: PaintingAudioProps) {
 
             <div className="flex items-center gap-3">
                 {/* Avatar */}
-                <div className="h-20 w-20 p-2 shrink-0 overflow-hidden rounded-full border-2 border-gray-300">
-                    <img
-                        src='/images/steen.png'
-                        alt=""
-                        className="h-full w-full object-cover"
-                    />
-                </div>
+                {getSteenPortrait()}
 
                 {/* Main controls */}
                 <div className="flex flex-1 flex-col gap-2 opacity-50">

@@ -435,8 +435,6 @@ export default function Painting(props: PaintingProps) {
     }
   }, [svgWrapperSize]);
 
-  console.log("inactive", inactive);
-
   useEffect(() => {
     if (svgRef.current != null) {
       setHiddenImages(svgRef.current as SVGSVGElement, true);
@@ -476,7 +474,7 @@ export default function Painting(props: PaintingProps) {
     <div className="size-full grid grid-cols-1 grid-rows-1 relative">
       <div className="absolute size-full">
         <div
-          className="size-full flex justify-center resize-none relative"
+          className="size-full flex justify-center resize-none relative cursor-pointer"
           onClick={(e) => {
             resetView();
             if (svgRef.current != null) {

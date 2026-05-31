@@ -8,7 +8,7 @@ import { setMode, setSelectedPainting } from "../../store/appSlice";
 import { State, store } from "../../store/store";
 import Painting from "./2d-painting/painting";
 import { PaintingTimeline } from "./2d-painting/PaintingTimeline";
-import { PaintingAudio } from "./2d-painting/PaintingAudio";
+import { getSteenPortrait, PaintingAudio } from "./2d-painting/PaintingAudio";
 import { PaintingMap } from "./map/PaintingMap";
 
 const reenie_beanie = Reenie_Beanie({ weight: "400", subsets: ["latin"] });
@@ -29,6 +29,44 @@ const paintings = [
   { key: "modelcamp", svgFile: "/images/Model Camp scene-1.svg" },
   { key: "whitebus", svgFile: "/images/White Buses scene-1.svg" },
 ];
+
+function renderStoryParagraph(text: string, paragraphIndex: number) {
+  const quotePattern = /quote\((.*?)\)/g;
+  const parts = [];
+  let lastIndex = 0;
+  let match;
+
+  while ((match = quotePattern.exec(text)) !== null) {
+    if (match.index > lastIndex) {
+      parts.push(text.slice(lastIndex, match.index));
+    }
+
+    parts.push(
+      <div className="w-full flex flex-row gap-3">
+        {getSteenPortrait()}
+        <span className="italic" key={`story-quote-${paragraphIndex}-${match.index}`}>
+          {match[1]}
+        </span>
+      </div>
+    );
+
+    lastIndex = match.index + match[0].length;
+  }
+
+  if (lastIndex < text.length) {
+    parts.push(text.slice(lastIndex));
+  }
+
+  return parts.length > 0 ? parts : text;
+}
+
+function renderStoryText(text: string) {
+  return text.split("\n").map((paragraph, i) => (
+    <p key={`story-text-${i}`}>
+      {renderStoryParagraph(paragraph, i)}
+    </p>
+  ));
+}
 
 export interface MapEntry {
   title: string;
@@ -153,11 +191,7 @@ function MainMenu() {
                     </div>
                     <div className="text-sm flex gap-1 flex-col">
                       {story.text
-                        ? story.text
-                          .split("\n")
-                          .map((e, i) => (
-                            <p key={`timeline-text-${i}`}>{e}</p>
-                          ))
+                        ? renderStoryText(story.text)
                         : "Please add text."}
                     </div>
                     <div className="text-sm flex gap-1 flex-col">
@@ -183,7 +217,7 @@ function MainMenu() {
                   </div> */}
                   </div>
                 </div>
-                <svg className="size-full absolute top-0 left-0">
+                <svg className="size-full absolute top-0 left-0 pointer-events-none">
                   <filter id="roughpaper-sidebar">
                     <feTurbulence
                       type="fractalNoise"
