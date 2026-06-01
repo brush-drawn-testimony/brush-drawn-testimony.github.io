@@ -3,7 +3,7 @@
 import Map, { Layer, Source, type LayerProps, type MapRef } from "@vis.gl/react-maplibre";
 import type { Feature, FeatureCollection, LineString, MultiPolygon, Point, Polygon, Position } from "geojson";
 import type { StyleSpecification } from "maplibre-gl";
-import { useEffect, useMemo, useRef, useState } from "react";
+import { Component, type ReactNode, useEffect, useMemo, useRef, useState } from "react";
 
 type LngLatPosition = [number, number];
 type TravelBounds = [LngLatPosition, LngLatPosition];
@@ -16,6 +16,7 @@ type CountryLabelProperties = World1938Properties & {
     labelArea: number;
     labelTier: "large" | "medium" | "small" | "tiny" | "micro";
 };
+type HistoricalMapFeatureCollection = FeatureCollection<Polygon | MultiPolygon, World1938Properties>;
 type CountryLabelFeatureCollection = FeatureCollection<Point, CountryLabelProperties>;
 
 interface PaintingMapProps {
@@ -35,6 +36,8 @@ const emptyCountryLabels: CountryLabelFeatureCollection = {
     type: "FeatureCollection",
     features: [],
 };
+const svgFallbackPaddingPercent = 0.16;
+const mercatorLatitudeLimit = 85.051129;
 
 const transparentMapStyle: StyleSpecification = {
     version: 8,
@@ -115,6 +118,29 @@ function createWorld1938LabelLayer(
             "text-halo-blur": 0.5,
         },
     };
+}
+
+class MapErrorBoundary extends Component<
+    { children: ReactNode; onMapUnavailable: () => void },
+    { hasError: boolean }
+> {
+    state = { hasError: false };
+
+    static getDerivedStateFromError() {
+        return { hasError: true };
+    }
+
+    componentDidCatch() {
+        this.props.onMapUnavailable();
+    }
+
+    render() {
+        if (this.state.hasError) {
+            return null;
+        }
+
+        return this.props.children;
+    }
 }
 
 const world1938LabelLayers = [
@@ -271,7 +297,7 @@ function getLabelTier(labelArea: number): CountryLabelProperties["labelTier"] | 
     return undefined;
 }
 
-function createCountryLabelFeatures(data: FeatureCollection<Polygon | MultiPolygon, World1938Properties>): CountryLabelFeatureCollection {
+function createCountryLabelFeatures(data: HistoricalMapFeatureCollection): CountryLabelFeatureCollection {
     const features: CountryLabelFeatureCollection["features"] = [];
 
     data.features.forEach((feature) => {
@@ -359,9 +385,230 @@ function fitMapToTravelBounds(map: TravelBoundsFitter, bounds: TravelBounds) {
     });
 }
 
+function canCreateWebGlContext() {
+    if (typeof document === "undefined") {
+        return true;
+    }
+
+    const canvas = document.createElement("canvas");
+    const contextAttributes: WebGLContextAttributes = {
+        antialias: false,
+        failIfMajorPerformanceCaveat: false,
+        powerPreference: "high-performance",
+    };
+
+    try {
+        return Boolean(
+            canvas.getContext("webgl2", contextAttributes)
+            || canvas.getContext("webgl", contextAttributes)
+            || canvas.getContext("experimental-webgl", contextAttributes)
+        );
+    } catch {
+        return false;
+    }
+}
+
+function shouldUseFallbackForMapError(error: unknown) {
+    if (error == null) {
+        return false;
+    }
+
+    const message = error instanceof Error
+        ? error.message
+        : String(error);
+
+    return /webgl|context|swiftshader|angle/i.test(message);
+}
+
+function clampLatitude(latitude: number) {
+    return Math.max(-mercatorLatitudeLimit, Math.min(mercatorLatitudeLimit, latitude));
+}
+
+function projectMercator([longitude, latitude]: LngLatPosition): LngLatPosition {
+    const latitudeRadians = clampLatitude(latitude) * Math.PI / 180;
+    const mercatorY = Math.log(Math.tan(Math.PI / 4 + latitudeRadians / 2)) * 180 / Math.PI;
+
+    return [longitude, -mercatorY];
+}
+
+function createSvgViewBox(bounds: TravelBounds) {
+    const [southWest, northEast] = bounds;
+    const northWest = projectMercator([southWest[0], northEast[1]]);
+    const southEast = projectMercator([northEast[0], southWest[1]]);
+    const width = Math.max(southEast[0] - northWest[0], 1);
+    const height = Math.max(southEast[1] - northWest[1], 1);
+    const padding = Math.max(width, height) * svgFallbackPaddingPercent;
+
+    return {
+        minX: northWest[0] - padding,
+        minY: northWest[1] - padding,
+        width: width + padding * 2,
+        height: height + padding * 2,
+    };
+}
+
+function projectedPositionToSvgCommand(position: Position, index: number) {
+    if (!isLngLatPosition(position)) {
+        return "";
+    }
+
+    const [x, y] = projectMercator(position);
+    const command = index === 0 ? "M" : "L";
+    return `${command}${x.toFixed(4)} ${y.toFixed(4)}`;
+}
+
+function createSvgRingPath(ring: Position[]) {
+    const path = ring
+        .map(projectedPositionToSvgCommand)
+        .filter(Boolean)
+        .join(" ");
+
+    return path.length > 0 ? `${path} Z` : "";
+}
+
+function createSvgPolygonPath(polygon: Position[][]) {
+    return polygon
+        .map(createSvgRingPath)
+        .filter(Boolean)
+        .join(" ");
+}
+
+function createSvgFeaturePath(feature: Feature<Polygon | MultiPolygon, World1938Properties>) {
+    if (feature.geometry.type === "Polygon") {
+        return createSvgPolygonPath(feature.geometry.coordinates);
+    }
+
+    return feature.geometry.coordinates
+        .map(createSvgPolygonPath)
+        .filter(Boolean)
+        .join(" ");
+}
+
+function createSvgLinePoints(coordinates: Position[]) {
+    return coordinates
+        .filter(isLngLatPosition)
+        .map((coordinate) => projectMercator(coordinate).map((value) => value.toFixed(4)).join(","))
+        .join(" ");
+}
+
+function isPointInSvgViewBox(coordinate: LngLatPosition, viewBox: ReturnType<typeof createSvgViewBox>) {
+    const [x, y] = projectMercator(coordinate);
+
+    return (
+        x >= viewBox.minX
+        && x <= viewBox.minX + viewBox.width
+        && y >= viewBox.minY
+        && y <= viewBox.minY + viewBox.height
+    );
+}
+
+function getSvgLabelFontSize(labelTier: CountryLabelProperties["labelTier"]) {
+    switch (labelTier) {
+        case "large":
+            return 3.6;
+        case "medium":
+            return 2.6;
+        case "small":
+            return 1.9;
+        case "tiny":
+            return 1.35;
+        case "micro":
+            return 1;
+    }
+}
+
+function PaintingMapSvgFallback({
+    mapData,
+    countryLabels,
+    routeFeature,
+    animatedRouteFeature,
+    travelPointFeature,
+    travelBounds,
+}: {
+    mapData: HistoricalMapFeatureCollection | null;
+    countryLabels: CountryLabelFeatureCollection;
+    routeFeature: Feature<LineString>;
+    animatedRouteFeature: Feature<LineString>;
+    travelPointFeature: Feature<Point>;
+    travelBounds: TravelBounds;
+}) {
+    const viewBox = useMemo(() => createSvgViewBox(travelBounds), [travelBounds]);
+    const countryPaths = useMemo(() => {
+        return mapData?.features
+            .map((feature, index) => ({
+                id: `${feature.properties?.NAME ?? "country"}-${index}`,
+                path: createSvgFeaturePath(feature),
+            }))
+            .filter((feature) => feature.path.length > 0) ?? [];
+    }, [mapData]);
+    const routePoints = useMemo(() => createSvgLinePoints(routeFeature.geometry.coordinates), [routeFeature]);
+    const animatedRoutePoints = useMemo(() => createSvgLinePoints(animatedRouteFeature.geometry.coordinates), [animatedRouteFeature]);
+    const [travelPointX, travelPointY] = useMemo(
+        () => isLngLatPosition(travelPointFeature.geometry.coordinates)
+            ? projectMercator(travelPointFeature.geometry.coordinates)
+            : [0, 0],
+        [travelPointFeature]
+    );
+    const visibleLabels = useMemo(() => {
+        return countryLabels.features.filter((feature) => {
+            return feature.properties.labelTier !== "micro"
+                && isLngLatPosition(feature.geometry.coordinates)
+                && isPointInSvgViewBox(feature.geometry.coordinates, viewBox);
+        });
+    }, [countryLabels, viewBox]);
+
+    return (
+        <svg
+            className="painting-map-fallback"
+            viewBox={`${viewBox.minX} ${viewBox.minY} ${viewBox.width} ${viewBox.height}`}
+            preserveAspectRatio="xMidYMid meet"
+            role="img"
+            aria-label="Historical travel map"
+        >
+            <rect
+                x={viewBox.minX}
+                y={viewBox.minY}
+                width={viewBox.width}
+                height={viewBox.height}
+                className="painting-map-fallback-background"
+            />
+            <g className="painting-map-fallback-countries">
+                {countryPaths.map((feature) => (
+                    <path key={feature.id} d={feature.path} />
+                ))}
+            </g>
+            <polyline className="painting-map-fallback-route" points={routePoints} />
+            <polyline className="painting-map-fallback-route-active" points={animatedRoutePoints} />
+            <circle className="painting-map-fallback-point" cx={travelPointX} cy={travelPointY} r="0.55" />
+            <g className="painting-map-fallback-labels">
+                {visibleLabels.map((feature, index) => {
+                    if (!isLngLatPosition(feature.geometry.coordinates)) {
+                        return null;
+                    }
+
+                    const [x, y] = projectMercator(feature.geometry.coordinates);
+
+                    return (
+                        <text
+                            key={`${feature.properties.NAME ?? "label"}-${index}`}
+                            x={x}
+                            y={y}
+                            fontSize={getSvgLabelFontSize(feature.properties.labelTier)}
+                        >
+                            {feature.properties.NAME}
+                        </text>
+                    );
+                })}
+            </g>
+        </svg>
+    );
+}
+
 export function PaintingMap(props: PaintingMapProps) {
     const mapRef = useRef<MapRef | null>(null);
     const [animationProgress, setAnimationProgress] = useState(props.end ? 0 : 1);
+    const [useSvgFallback, setUseSvgFallback] = useState(false);
+    const [historicalMapData, setHistoricalMapData] = useState<HistoricalMapFeatureCollection | null>(null);
     const [countryLabels, setCountryLabels] = useState<CountryLabelFeatureCollection>(emptyCountryLabels);
 
     const startPosition = useMemo(() => toPosition(props.start), [props.start.lat, props.start.lon]);
@@ -394,19 +641,26 @@ export function PaintingMap(props: PaintingMapProps) {
     }, [currentPosition]);
 
     useEffect(() => {
+        setUseSvgFallback(!canCreateWebGlContext());
+    }, []);
+
+    useEffect(() => {
         let isMounted = true;
 
+        setHistoricalMapData(null);
         setCountryLabels(emptyCountryLabels);
 
         fetch(historicalMapUrl)
             .then((response) => response.json())
-            .then((data: FeatureCollection<Polygon | MultiPolygon, World1938Properties>) => {
+            .then((data: HistoricalMapFeatureCollection) => {
                 if (isMounted) {
+                    setHistoricalMapData(data);
                     setCountryLabels(createCountryLabelFeatures(data));
                 }
             })
             .catch(() => {
                 if (isMounted) {
+                    setHistoricalMapData(null);
                     setCountryLabels(emptyCountryLabels);
                 }
             });
@@ -458,49 +712,67 @@ export function PaintingMap(props: PaintingMapProps) {
 
     return (
         <div className={`painting-map size-full bg-transparent z-1 ${props.className ?? ""}`}>
-            <Map
-                ref={mapRef}
-                style={{ width: "100%", height: "100%" }}
-                initialViewState={{
-                    longitude: 10,
-                    latitude: 30,
-                    zoom: 1.15,
-                }}
-                mapStyle={transparentMapStyle}
-                minZoom={0.75}
-                maxZoom={8}
-                projection="mercator"
-                attributionControl={false}
-                dragPan={false}
-                scrollZoom={false}
-                boxZoom={false}
-                doubleClickZoom={false}
-                touchZoomRotate={false}
-                dragRotate={false}
-                keyboard={false}
-                onLoad={(event) => {
-                    fitMapToTravelBounds(event.target, travelBounds);
-                }}
-            >
-                <Source id="world1938" type="geojson" data={historicalMapUrl}>
-                    <Layer {...world1938FillLayer} />
-                    <Layer {...world1938BorderLayer} />
-                </Source>
-                <Source id="world1938Labels" type="geojson" data={countryLabels}>
-                    {world1938LabelLayers.map((layer) => (
-                        <Layer key={layer.id} {...layer} />
-                    ))}
-                </Source>
-                <Source id="fullTravelRoute" type="geojson" data={routeFeature}>
-                    <Layer {...fullTravelRouteLayer} />
-                </Source>
-                <Source id="animatedTravelRoute" type="geojson" data={animatedRouteFeature}>
-                    <Layer {...animatedTravelRouteLayer} />
-                </Source>
-                <Source id="travelPoint" type="geojson" data={travelPointFeature}>
-                    <Layer {...travelPointLayer} />
-                </Source>
-            </Map>
+            {useSvgFallback ? (
+                <PaintingMapSvgFallback
+                    mapData={historicalMapData}
+                    countryLabels={countryLabels}
+                    routeFeature={routeFeature}
+                    animatedRouteFeature={animatedRouteFeature}
+                    travelPointFeature={travelPointFeature}
+                    travelBounds={travelBounds}
+                />
+            ) : (
+                <MapErrorBoundary onMapUnavailable={() => setUseSvgFallback(true)}>
+                    <Map
+                        ref={mapRef}
+                        style={{ width: "100%", height: "100%" }}
+                        initialViewState={{
+                            longitude: 10,
+                            latitude: 30,
+                            zoom: 1.15,
+                        }}
+                        mapStyle={transparentMapStyle}
+                        minZoom={0.75}
+                        maxZoom={8}
+                        projection="mercator"
+                        attributionControl={false}
+                        dragPan={false}
+                        scrollZoom={false}
+                        boxZoom={false}
+                        doubleClickZoom={false}
+                        touchZoomRotate={false}
+                        dragRotate={false}
+                        keyboard={false}
+                        onLoad={(event) => {
+                            fitMapToTravelBounds(event.target, travelBounds);
+                        }}
+                        onError={(event) => {
+                            if (shouldUseFallbackForMapError(event.error)) {
+                                setUseSvgFallback(true);
+                            }
+                        }}
+                    >
+                        <Source id="world1938" type="geojson" data={historicalMapUrl}>
+                            <Layer {...world1938FillLayer} />
+                            <Layer {...world1938BorderLayer} />
+                        </Source>
+                        <Source id="world1938Labels" type="geojson" data={countryLabels}>
+                            {world1938LabelLayers.map((layer) => (
+                                <Layer key={layer.id} {...layer} />
+                            ))}
+                        </Source>
+                        <Source id="fullTravelRoute" type="geojson" data={routeFeature}>
+                            <Layer {...fullTravelRouteLayer} />
+                        </Source>
+                        <Source id="animatedTravelRoute" type="geojson" data={animatedRouteFeature}>
+                            <Layer {...animatedTravelRouteLayer} />
+                        </Source>
+                        <Source id="travelPoint" type="geojson" data={travelPointFeature}>
+                            <Layer {...travelPointLayer} />
+                        </Source>
+                    </Map>
+                </MapErrorBoundary>
+            )}
         </div>
     );
 }
