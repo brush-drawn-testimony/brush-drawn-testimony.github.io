@@ -117,6 +117,27 @@
     "location": "Theresienstadt, Czechoslovakia",
     "time": "1935 - 1943"
   },
+   "infirmary": {
+    "title": "Infirmary",
+    "subtitle": "...",
+    "text": "...",
+    "location": "Theresienstadt, Czechoslovakia",
+    "time": "13 March 1944"
+  },
+  "coat_x5F_group": {
+    "title": "Infirmary",
+    "subtitle": "Forced Labour",
+    "text": "...",
+    "location": "Theresienstadt, Czechoslovakia",
+    "time": "13 March 1944"
+  },
+  "axelmetz_x5F_group": {
+    "title": "Infirmary",
+    "subtitle": "Death",
+    "text": "...",
+    "location": "Theresienstadt, Czechoslovakia",
+    "time": "13 March 1944"
+  },
   "soccer": {
     "title": "Playing Soccer",
     "subtitle": "Life in Theresienstadt",
