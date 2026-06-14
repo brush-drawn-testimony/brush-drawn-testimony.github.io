@@ -29,6 +29,7 @@ const paintings = [
   { key: "soccer", svgFile: "/images/Soccer scene-3b.svg" },
   { key: "modelcamp", svgFile: "/images/Model Camp scene-1.svg" },
   { key: "whitebus", svgFile: "/images/White Buses scene-1.svg" },
+  { key: "after", svgFile: "/images/11. After Theresienstadt.svg" },
 ];
 
 function renderStoryParagraph(text: string, paragraphIndex: number) {
