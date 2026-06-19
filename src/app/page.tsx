@@ -2,7 +2,7 @@
 import { Noto_Serif, Reenie_Beanie } from "next/font/google";
 import Image from "next/image";
 import Link from "next/link";
-import { useEffect, useMemo, useState } from "react";
+import { useCallback, useEffect, useMemo, useState } from "react";
 import { Provider, useDispatch, useSelector } from "react-redux";
 import { setMode, setSelectedPainting } from "../../store/appSlice";
 import { State, store } from "../../store/store";
@@ -99,6 +99,7 @@ function MainMenu() {
   const selectedGroup = useSelector((state: State) => state.app.selectedGroup);
 
   const [storyData, setStoryData] = useState<Record<string, StoryEntry>>();
+  const [dataView, setDataView] = useState<boolean>(false);
 
   useEffect(() => {
     fetch("/story-data.json")
@@ -132,6 +133,63 @@ function MainMenu() {
     }
   }, [painting, selectedGroup, storyData]);
 
+  const renderContent = useCallback((story, dataView) => {
+    return <>
+      <div className={`text-xl ${noto_serif.className}`}>
+        {story.title
+          ? story.title
+            .split("\n")
+            .map((e, i) => <div key={`title-${i}`}>{e}</div>)
+          : "Please add title."}
+      </div>
+      <div className={`text-2xl ${reenie_beanie.className}`}>
+        {story.subtitle
+          ? story.subtitle
+            .split("\n")
+            .map((e, i) => (
+              <div key={`timeline-subtitle-${i}`}>{e}</div>
+            ))
+          : "Please add subtitle."}
+      </div>
+      <div className="text-sm opacity-75 flex flex-col gap-1">
+        <p>{story.time}</p>
+        <p>{story.location}</p>
+      </div>
+      {dataView && story.data != null ?
+        <>
+          {story.data.map(e => <div className="border-black border-0">
+            {e.image && <div className="flex items-center">
+              <img className="w-full" src={e.image} />
+            </div>}
+            {e.caption && <div>{e.caption}</div>}
+            {e.copyright && <div>{e.copyright}</div>}
+          </div>)}
+        </>
+        : <>
+          <div className="text-base flex gap-1 flex-col">
+            {story.text
+              ? renderStoryText(story.text)
+              : "Please add text."}
+          </div>
+          <div className="text-base flex gap-1 flex-col">
+            {story.audio &&
+              <PaintingAudio src={`/audio/${story.audio}`} />
+            }
+          </div>
+          {
+            story.map && <div className="text-sm flex gap-1 flex-col z-0">
+              <div className="h-[300px] w-full border-2 border-gray-300 rounded-md opacity-90">
+                <PaintingMap start={story.map.start} end={story.map.end} mapyear={story.map.mapyear} />
+              </div>
+              <div className="opacity-75">
+                {story.map.title && <span>{story.map.title}</span>}
+              </div>
+            </div>
+          }
+        </>}
+    </>
+  }, [])
+
   return (
     <div
       className="grid grid-cols-1 grid-rows-[1fr_auto] overflow-hidden size-full painting-main"
@@ -139,9 +197,9 @@ function MainMenu() {
         dispatch(setMode("explore"));
       }}
     >
-      <div className="relative size-full items-center grid grid-rows-1 grid-cols-[75%_25%] justify-center">
+      <div className="relative size-full items-center grid grid-rows-1 grid-cols-[70%_30%] justify-center">
         <div className="size-full">
-          <div className="absolute top-0 left-0 h-16 w-full z-50 flex px-2">
+          <div className="absolute top-0 left-0 h-16 w-full z-30 flex px-2">
             <Link
               className="relative w-25"
               href={"/"}
@@ -171,53 +229,11 @@ function MainMenu() {
             {storyData != null && (
               <div className="size-full text-gray-950 relative">
                 <div className="absolute top-0 left-0 size-full overflow-hidden overflow-y-scroll flex items-center">
-                  <div className="size-full flex gap-2 flex-col p-3 px-6 justify-center">
-                    <div className={`text-xl ${noto_serif.className}`}>
-                      {story.title
-                        ? story.title
-                          .split("\n")
-                          .map((e, i) => <div key={`title-${i}`}>{e}</div>)
-                        : "Please add title."}
-                    </div>
-                    <div className={`text-2xl ${reenie_beanie.className}`}>
-                      {story.subtitle
-                        ? story.subtitle
-                          .split("\n")
-                          .map((e, i) => (
-                            <div key={`timeline-subtitle-${i}`}>{e}</div>
-                          ))
-                        : "Please add subtitle."}
-                    </div>
-                    <div className="text-xs opacity-75 flex flex-col gap-1">
-                      <p>{story.time}</p>
-                      <p>{story.location}</p>
-                    </div>
-                    <div className="text-sm flex gap-1 flex-col">
-                      {story.text
-                        ? renderStoryText(story.text)
-                        : "Please add text."}
-                    </div>
-                    <div className="text-sm flex gap-1 flex-col">
-                      {story.audio &&
-                        <PaintingAudio src={`/audio/${story.audio}`} />
-                      }
-                    </div>
-                    {story.map && <div className="text-sm flex gap-1 flex-col z-0">
-                      <div className="h-[300px] w-full border-2 border-gray-300 rounded-md opacity-90">
-                        <PaintingMap start={story.map.start} end={story.map.end} mapyear={story.map.mapyear} />
-                      </div>
-                      <div className="opacity-75">
-                        {story.map.title && <span>{story.map.title}</span>}
-                      </div>
+                  {story.data != null &&
+                    <div className="absolute top-5 right-5 cursor-pointer z-50" onClick={() => { setDataView(dataView ? false : true) }}>See the {dataView ? "story" : "data"}!
                     </div>}
-                    {/* <div className="grid grid-cols-[auto_auto] items-center justify-center gap-2">
-                    <CursorArrowRaysIcon
-                      width={30}
-                      height={30}
-                      className="size-8 animate-myping"
-                    />
-                    <div>Click "Next" to begin Steen's story!</div>
-                  </div> */}
+                  <div className="w-full max-h-full flex gap-2 flex-col p-3 px-6">
+                    {renderContent(story, dataView)}
                   </div>
                 </div>
                 <svg className="size-full absolute top-0 left-0 pointer-events-none">
