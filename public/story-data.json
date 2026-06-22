@@ -82,7 +82,10 @@
       }
     },
     "data": [
-      { "image": "/images/data/cattlecar.png", "caption": "Cattlecar" },
+      {
+        "image": "/images/data/cattlecar.png",
+        "caption": "This is a longer caption of the image shoing a cattlecar for deportation."
+      },
       {
         "image": "/images/data/station-people.png",
         "caption": "Station and people"
@@ -99,7 +102,13 @@
     "subtitle": "Transport to Theresienstadt",
     "text": "The conditions aboard the transport were poor. Although historians commonly employ the term 'boxcar', Steen and fellow survivors consistently use the term 'cattle car', because that is what it was. The absence of any sanitary facilities produced an overwhelming smell, which Steen remembers vividly. Steen recounts the frightened faces around him, no one had any knowledge of what would happen to them.",
     "location": "Theresienstadt, Czechoslovakia",
-    "time": "2 October 1943"
+    "time": "2 October 1943",
+    "data": [
+      {
+        "image": "/images/data/cattlecar.png",
+        "caption": "This is a complete different cattlecar, because it is only showing when the cattlecar is clicked."
+      }
+    ]
   },
   "roof_x5F_group": {
     "title": "Station Bauschowitz-Theresienstadt",

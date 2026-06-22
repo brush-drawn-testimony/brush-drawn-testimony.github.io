@@ -86,6 +86,7 @@ export interface StoryEntry {
   svgElement: string;
   audio?: string;
   map?: MapEntry;
+  data?: Record<string, string>
 }
 
 function MainMenu() {
@@ -100,6 +101,7 @@ function MainMenu() {
 
   const [storyData, setStoryData] = useState<Record<string, StoryEntry>>();
   const [dataView, setDataView] = useState<boolean>(false);
+  const [focusData, setFocusData] = useState<any>(null);
 
   useEffect(() => {
     fetch("/story-data.json")
@@ -133,20 +135,20 @@ function MainMenu() {
     }
   }, [painting, selectedGroup, storyData]);
 
-  const renderContent = useCallback((story, dataView) => {
+  const renderContent = useCallback((story: any, dataView: any) => {
     return <>
       <div className={`text-xl ${noto_serif.className}`}>
         {story.title
           ? story.title
             .split("\n")
-            .map((e, i) => <div key={`title-${i}`}>{e}</div>)
+            .map((e: any, i: number) => <div key={`title-${i}`}>{e}</div>)
           : "Please add title."}
       </div>
       <div className={`text-2xl ${reenie_beanie.className}`}>
         {story.subtitle
           ? story.subtitle
             .split("\n")
-            .map((e, i) => (
+            .map((e: any, i: number) => (
               <div key={`timeline-subtitle-${i}`}>{e}</div>
             ))
           : "Please add subtitle."}
@@ -157,12 +159,12 @@ function MainMenu() {
       </div>
       {dataView && story.data != null ?
         <>
-          {story.data.map(e => <div className="border-black border-0">
-            {e.image && <div className="flex items-center">
-              <img className="w-full" src={e.image} />
+          {story.data.map((e: any) => <div className="border-black border-0">
+            {e.image && <div className="flex items-center cursor-zoom-in">
+              <img onClick={() => { setFocusData(e) }} className="w-full" src={e.image} />
             </div>}
             {e.caption && <div>{e.caption}</div>}
-            {e.copyright && <div>{e.copyright}</div>}
+            {e.copyright && <div>&copy;{e.copyright}</div>}
           </div>)}
         </>
         : <>
@@ -230,7 +232,7 @@ function MainMenu() {
               <div className="size-full text-gray-950 relative">
                 <div className="absolute top-0 left-0 size-full overflow-hidden overflow-y-scroll flex items-center">
                   {story.data != null &&
-                    <div className="absolute top-5 right-5 cursor-pointer z-50" onClick={() => { setDataView(dataView ? false : true) }}>See the {dataView ? "story" : "data"}!
+                    <div className="absolute top-5 right-5 cursor-pointer z-50 text-sm border border-gray-300 rounded-full p-1" onClick={() => { setDataView(dataView ? false : true) }}>See the {dataView ? "story" : "data"}!
                     </div>}
                   <div className="w-full max-h-full flex gap-2 flex-col p-3 px-6">
                     {renderContent(story, dataView)}
@@ -272,6 +274,14 @@ function MainMenu() {
           <PaintingTimeline paintings={paintings} storyData={storyData} />
         )}
       </div>
+
+      {focusData != null && <div className="absolute top-0 left-0 size-full flex flex-col gap-2 items-center justify-center bg-gray-200/80 z-[900] cursor-zoom-out text-base" onClick={() => { setFocusData(null) }}>
+        <div className="h-[80%] w-[80%] flex items-center justify-center">
+          <img className="h-full w-full object-contain" src={focusData.image}></img>
+        </div>
+        {focusData.caption != null && <div>{focusData.caption}</div>}
+        {focusData.copyright != null && <div>&copy; {focusData.copyright}</div>}
+      </div>}
     </div>
   );
 }

@@ -338,7 +338,7 @@ input:checked + .slider:before {
     fill: rgba(0, 0, 0, 0); /* White */
   }
   50% {
-    fill: rgba(226, 226, 226, 0.68); /* Transparent */
+    fill: rgba(196, 196, 196, 0.68); /* Transparent */
   }
   100% {
     fill: rgba(0, 0, 0, 0); /* White */
