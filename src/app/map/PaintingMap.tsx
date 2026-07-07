@@ -30,7 +30,7 @@ const travelAnimationDurationMs = 4500;
 const travelReplayPauseMs = 1300;
 const singlePointBoundsPaddingDegrees = 2;
 const minimumLabelArea = 0.2;
-const availableHistoricalMapYears = [1938, 1945];
+const availableHistoricalMapYears = [1938, 1945, 1960];
 
 const emptyCountryLabels: CountryLabelFeatureCollection = {
     type: "FeatureCollection",
