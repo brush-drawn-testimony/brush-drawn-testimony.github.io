@@ -10,7 +10,7 @@
       {
         "image": "/images/data/steen.jpg",
         "caption": "Holocaust survivor Steen Metz at his home on Feb. 3, 2022, in Barrington.",
-        "copyright": "Stacey Wescott / Chicago Tribune"
+        "copyright": " Stacey Wescott / Chicago Tribune"
       }
     ]
   },
@@ -25,12 +25,12 @@
       {
         "image": "/images/data/icecream.jpg",
         "caption": "Steen Metz, age 8, eating an ice cream cone.",
-        "copyright": "IHMEC: courtesy of Steen Metz"
+        "copyright": " IHMEC: courtesy of Steen Metz"
       },
       {
         "image": "/images/data/family.jpg",
         "caption": "Steen Metz (around age 6), sitting with his grandmother, Betty Metz, and his father, Axel Metz.",
-        "copyright": "IHMEC: courtesy of Steen Metz"
+        "copyright": " IHMEC: courtesy of Steen Metz"
       },
       {
         "image": "/images/data/stovesberg.jpg",
@@ -49,7 +49,7 @@
       {
         "image": "/images/data/icecream.jpg",
         "caption": "Steen Metz, age 8, eating an ice cream cone.",
-        "copyright": "IHMEC: courtesy of Steen Metz"
+        "copyright": " IHMEC: courtesy of Steen Metz"
       }
     ]
   },
@@ -63,7 +63,7 @@
       {
         "image": "/images/data/family.jpg",
         "caption": "Steen Metz (around age 6), sitting with his grandmother, Betty Metz, and his father, Axel Metz.",
-        "copyright": "IHMEC: courtesy of Steen Metz"
+        "copyright": " IHMEC: courtesy of Steen Metz"
       }
     ]
   },
@@ -76,6 +76,7 @@
     "data": [
       {
         "caption": "Insert photos here."
+        "copyright": null
       }
     ]
   },
@@ -121,15 +122,18 @@
     "data": [
       {
         "image": "/images/data/arrival.jpg",
-        "caption": "Theresienstadt-Bauschowitz train station during WWI"
+        "caption": "Theresienstadt-Bauschowitz train station during WWI",
+        "copyright": null
       },
       {
         "image": "/images/data/arrival2.jpg",
-        "caption": "Arrival of Jews in Theresienstadt"
+        "caption": "Arrival of Jews in Theresienstadt",
+        "copyright": " USHMM Photo Archives"
       },
       {
         "image": "/images/data/trainstation.jpg",
-        "caption": "Postcard of the Theresienstadt-Bauschowitz train station in 1907, where prisoners would arrive before the construction of a station in Theresienstadt."
+        "caption": "Postcard of the Theresienstadt-Bauschowitz train station in 1907, where prisoners would arrive before the construction of a station in Theresienstadt.",
+        "copyright": null
       }
     ]
   },
@@ -142,7 +146,8 @@
     "data": [
       {
         "image": "/images/data/cattlecar.png",
-        "caption": "After their arrest, Steen and his parents were loaded into a crowded cattle car. Often, historians use the term box cart, but as Steen mentions, survivors often reter to it as a cattle cart', becaus that is what it was. Steen recalls that the cart smelled horrible as it had no bathroom facilities."
+        "caption": "After their arrest, Steen and his parents were loaded into a crowded cattle car. Often, historians use the term box cart, but as Steen mentions, survivors often reter to it as a cattle cart', becaus that is what it was. Steen recalls that the cart smelled horrible as it had no bathroom facilities.",
+        "copyright": null
       }
     ]
   },
@@ -155,7 +160,8 @@
     "data": [
       {
         "image": "/images/data/roof.jpg",
-        "caption": "Roof of Theresienstadt-Bauschowitz Train Station"
+        "caption": "Roof of Theresienstadt-Bauschowitz Train Station",
+        "copyright": "USHMM Photo Archives"
       }
     ]
   },
@@ -168,11 +174,13 @@
     "data": [
       {
         "image": "/images/data/barracks2.jpg",
-        "caption": "Picture of Barracks."
+        "caption": "Picture of Barracks.",
+        "copyright": null
       },
       {
         "image": "/images/data/barracks.jpg",
-        "caption": "Reconstruction of Barracks."
+        "caption": "Reconstruction of Barracks.",
+        "copyright": null
       }
     ]
   },
@@ -185,7 +193,8 @@
     "data": [
       {
         "image": "/images/data/forcedLabour.jpg",
-        "caption": "Forced Labour in Theresienstadt."
+        "caption": " Forced Labour in Theresienstadt.",
+        "copyright": null
       }
     ]
   },
@@ -206,7 +215,7 @@
       {
         "image": "/images/data/infirmary_drawingfleischmann.jpg",
         "caption": "Surgical Ward in the Old Barracks, drawn by Karel Fleischmann.",
-        "copyright": "Art Collection, Ghetto Fighters' House Museum Archive, catalogue no. 1763."
+        "copyright": " Art Collection, Ghetto Fighters' House Museum Archive, catalogue no. 1763."
       }
     ]
   },
@@ -221,12 +230,12 @@
       {
         "image": "/images/data/forcedLabour2.jpg",
         "caption": "A painting depicting the main entrance gate to the Theresienstadt ghetto in the Czech Republic and forced labourers with tools returning from work. Painted by Edvard Neugebauer on August 28, 1943.",
-        "copyright": "Montreal Holocaust Museum. Photo: Peter Berra."
+        "copyright": " Montreal Holocaust Museum. Photo: Peter Berra."
       },
       {
         "image": "/images/data/infirmary_forcedlabour.jpg",
         "caption": "Jews at forced labor, putting up fences beside barracks buildings in the Theresienstadt ghetto.",
-        "copyright": "Photo Archive, Ghetto Fighters' House Museum Archive, catalogue no. 15656."
+        "copyright": " Photo Archive, Ghetto Fighters' House Museum Archive, catalogue no. 15656."
       }
     ]
   },
@@ -287,11 +296,13 @@
     "data": [
       {
         "image": "/images/data/whitebussesBack.jpg",
-        "caption": "White Buses on their Way Back"
+        "caption": "White Buses on their Way Back",
+        "copyright": null
       },
       {
         "image": "/images/data/whitebussesOdense.jpg",
-        "caption": "White Buses on their way to Odense"
+        "caption": "White Buses on their way to Odense",
+        "copyright": null
       }
     ]
   },
@@ -304,11 +315,13 @@
     "data": [
       {
         "image": "/images/data/whitebusses.jpg",
-        "caption": "White Buses after Liberation"
+        "caption": "White Buses after Liberation",
+        "copyright": null
       },
       {
         "image": "/images/data/whitebusses2.jpg",
-        "caption": "White Buses Colorised"
+        "caption": "White Buses Colorised",
+        "copyright": null
       }
     ]
   },
@@ -328,7 +341,8 @@
     "data": [
       {
         "image": "/images/data/beautification.jpg",
-        "caption": "Drawing of Theresienstadt During Beautification Programme"
+        "caption": "Drawing of Theresienstadt During Beautification Programme",
+        "copyright": null
       }
     ]
   },
