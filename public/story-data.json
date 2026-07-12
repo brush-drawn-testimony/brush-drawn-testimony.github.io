@@ -168,11 +168,11 @@
     "data": [
       {
         "image": "/images/data/barracks2.jpg",
-        "caption": "Picture of Barracks"
+        "caption": "Picture of Barracks."
       },
       {
         "image": "/images/data/barracks.jpg",
-        "caption": "Reconstruction of Barracks"
+        "caption": "Reconstruction of Barracks."
       }
     ]
   },
@@ -185,7 +185,7 @@
     "data": [
       {
         "image": "/images/data/forcedLabour.jpg",
-        "caption": "Forced Labour in Theresienstadt"
+        "caption": "Forced Labour in Theresienstadt."
       }
     ]
   },
@@ -204,8 +204,9 @@
     "time": "13 March 1944",
     "data": [
       {
-        "image": "/images/data/forcedLabour2.jpg",
-        "caption": "Forced Labour Drawing"
+        "image": "/images/data/infirmary_drawingfleischmann.jpg",
+        "caption": "Surgical Ward in the Old Barracks, drawn by Karel Fleischmann.",
+        "copyright": "Art Collection, Ghetto Fighters' House Museum Archive, catalogue no. 1763."
       }
     ]
   },
@@ -215,7 +216,19 @@
     "text": "Within the camp, Axel was assigned to road-construction labour, physically demanding work to which he was not used. Working days were long, with minimal rest periods and little food. On one occasion, a guard confiscated his coat stating that it was unsuitable for manual labour.\n\nSteen only learned after the war that his father had been subjected to physical abuse during his time at Theresienstadt.",
     "location": "Theresienstadt, Czechoslovakia",
     "time": "13 March 1944",
-    "audio": "infirmary_coat.wav"
+    "audio": "infirmary_coat.wav",
+    "data": [
+      {
+        "image": "/images/data/forcedLabour2.jpg",
+        "caption": "A painting depicting the main entrance gate to the Theresienstadt ghetto in the Czech Republic and forced labourers with tools returning from work. Painted by Edvard Neugebauer on August 28, 1943.",
+        "copyright": "Montreal Holocaust Museum. Photo: Peter Berra."
+      },
+      {
+        "image": "/images/data/infirmary_forcedlabour.jpg",
+        "caption": "Jews at forced labor, putting up fences beside barracks buildings in the Theresienstadt ghetto.",
+        "copyright": "Photo Archive, Ghetto Fighters' House Museum Archive, catalogue no. 15656."
+      }
+    ]
   },
   "axelmetz_x5F_group": {
     "title": "Infirmary",
