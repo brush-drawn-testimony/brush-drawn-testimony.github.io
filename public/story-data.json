@@ -256,19 +256,19 @@
   "whitebus": {
     "title": "Happier Times",
     "subtitle": "Liberation by the White Busses",
-    "text": "In April 1945, a few weeks before the end of the war, prisoners in Theresienstadt heard rumours that the White Busses were on their way from Sweden to liberate the Danish Jews. Although Sweden was a neutral country, the White Busses arrived safely two days later, on 15 April. It was a miracle that they had been able to travel through Germany unharmed.\n\nClick on the interactive objects in the drawing to find out more.",
+    "text": "In April 1945, a few weeks before the end of the war, prisoners in Theresienstadt heard rumours that the White Busses were on their way from Sweden to liberate the Danish Jews. Although Sweden was a neutral country, the White Busses arrived there safely three days later, on 18 April. It was a miracle that they had been able to travel through Germany unharmed.\n\nClick on the interactive objects in the drawing to find out more.",
     "location": "Theresienstadt, Czechoslovakia",
     "time": "15 April 1945",
     "map": {
-      "title": "From Theresienstadt to Odense with the borders of 1938.",
+      "title": "From Theresienstadt to Sweden with the borders of 1938.",
       "mapyear": 1938,
       "start": {
         "lat": 50.51061972769558,
         "lon": 14.149830134701624
       },
       "end": {
-        "lat": 55.381537446534686,
-        "lon": 10.395795592972672
+        "lat": 55.605,
+        "lon": 12.997
       }
     },
     "data": [
@@ -302,7 +302,7 @@
   "crowd_x5F_group": {
     "title": "Happier Times",
     "subtitle": "Liberation by the White Busses",
-    "text": "When the White Busses reached the Danish border on 17 April, Denmark was still under occupation. Nonetheless, the rescued Jews were greeted with flowers, candy, snacks, and sandwiches. The White Busses continued to Sweden, where the liberated prisoners spent around eight days in quarantine.",
+    "text": "When the White Busses reached the Danish border on 17 April, Denmark was still under occupation. Nonetheless, the rescued Jews were greeted with flowers, candy, snacks, and sandwiches. Continuing through Denmark, the former prisoners took the ferry from the Copenhagen port to Malmö, Sweden, where the liberated prisoners were quarantined for two weeks in either Tylösand or Strangnæs.",
     "location": "Denmark",
     "time": "17 April 1945"
   },
@@ -331,12 +331,23 @@
     "subtitle": "The Return to Odense",
     "text": "When Steen and his mother returned to Odense, their apartment had been rented out due to a housing shortage. Their personal belongings had been kept safe by his father's former workplace. Friends took them in and gave them a warm welcome, and in time they found an apartment in Stovesberg again. This return marked the beginning of rebuilding ordinary life after Theresienstadt.\n\nClick on the interactive objects to find out more.",
     "location": "Odense, Denmark",
-    "time": "1945 - present"
+    "time": "1945 - present",
+    "map": {
+      "title": "From Sweden to Odense with the borders of 1938.",
+      "mapyear": 1938,
+      "start": {
+        "lat": 55.605,
+        "lon": 12.997
+      },
+      "end": {
+        "lat": 55.403756,
+        "lon": 10.402370
+      }
   },
   "schooling_x5F_group": {
     "title": "After Theresienstadt",
     "subtitle": "His Former Classmates",
-    "text": "After returning to Odense, Steen received private lessons from a teacher, which allowed him to return to his former fifth grade class at Henriette Hørlucks Skole. He does not recall his classmates ever asking where he had been. He had always assumed that his mother or the school principal had told them not to ask. At a later reunion, he learned that his classmates had made that decision themselves.\n\nquote(I am now wondering whether this teacher was also trying to evaluate whether I was capable of joining my previous classmates. If that was the case, I passed. I remember sitting in the teacher’s garden eating wonderful fresh-picked strawberries.)",
+    "text": "Steen received private lessons from a teacher, which allowed him to return to his former fifth grade class at Henriette Hørlucks Skole. He does not recall his classmates ever asking where he had been. He had always assumed that his mother or the school principal had told them not to ask. At a later reunion, he learned that his classmates had made that decision themselves.\n\nquote(I am now wondering whether this teacher was also trying to evaluate whether I was capable of joining my previous classmates. If that was the case, I passed. I remember sitting in the teacher’s garden eating wonderful fresh-picked strawberries.)",
     "location": "Odense, Denmark",
     "time": "1945"
   },
