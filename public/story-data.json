@@ -35,7 +35,7 @@
       {
         "image": "/images/data/stovesberg.jpg",
         "caption": "Stovesberg Apartment Complex",
-        "copyright": null
+        "copyright": " Housing Cooperative Stovesberg"
       }
     ]
   },
@@ -123,7 +123,7 @@
       {
         "image": "/images/data/arrival.jpg",
         "caption": "Theresienstadt-Bauschowitz train station during WWI",
-        "copyright": null
+        "copyright": " Zdeněk Fořt"
       },
       {
         "image": "/images/data/arrival2.jpg",
@@ -133,7 +133,7 @@
       {
         "image": "/images/data/trainstation.jpg",
         "caption": "Postcard of the Theresienstadt-Bauschowitz train station in 1907, where prisoners would arrive before the construction of a station in Theresienstadt.",
-        "copyright": null
+        "copyright": " Zdeněk Fořt"
       }
     ]
   },
@@ -175,12 +175,12 @@
       {
         "image": "/images/data/barracks2.jpg",
         "caption": "Picture of Barracks.",
-        "copyright": null
+        "copyright": " Photo Archive Terezín Memorial"
       },
       {
         "image": "/images/data/barracks.jpg",
         "caption": "Reconstruction of Barracks.",
-        "copyright": null
+        "copyright": " Terezín Memorial"
       }
     ]
   },
@@ -193,8 +193,8 @@
     "data": [
       {
         "image": "/images/data/forcedLabour.jpg",
-        "caption": " Forced Labour in Theresienstadt.",
-        "copyright": null
+        "caption": "Forced Labour in Theresienstadt.",
+        "copyright": " United States Holocaust Memorial Museum"
       }
     ]
   },
