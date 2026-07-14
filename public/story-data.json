@@ -85,7 +85,8 @@
     "subtitle": "A Knock at the Door",
     "text": "In the early morning of 2 October 1943, during the Jewish holiday Rosh Hashanah, Steen and his family hear a knock at their door. Steen later recalled his father opening it to find two Nazis in green uniforms standing in the hallway.",
     "location": "Odense, Denmark",
-    "time": "October 1943"
+    "time": "October 1943",
+    "audio": "arrest_door.mp3"
   },
   "baker_x5F_group": {
     "title": "The Arrest",
@@ -93,6 +94,7 @@
     "text": "Steen and his mother were permitted to collect a care package from the baker downstairs, while his father held upstairs under guard. They received a sack filled with Danish bread and pastries. Steen's mother, Magna, later recalled the large number of loaves they were given. After his return, Steen learned that the baker had offered to help them escape through the tunnels beneath the apartment. However, they could not have accepted as it would most likely have led to the baker and his father being shot.",
     "location": "Odense, Denmark",
     "time": "October 1943"
+    "audio": "arrest_baker.mp3"
   },
   "vestreskole_x5F_group": {
     "title": "The Arrest",
