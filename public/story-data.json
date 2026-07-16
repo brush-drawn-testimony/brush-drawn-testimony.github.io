@@ -190,7 +190,7 @@
   "mother_x5F_group": {
     "title": "Forced Labour",
     "subtitle": "Mica Production",
-    "text": "According to Steen’s testimony, his mother was not subjected to physical abuse in Theresienstadt. In addition to childcare duties, she was assigned to factory work, producing insulation material for airplanes from mica. On one occasion, after telling a soldier that she was faring poorly following her husband’s death from malnutrition, the soldier returned each day for eight days, compelling her to state that her husband had died of pneumonia. On a separate occasion, a guard deliberately pushed over a bucket of dirty water while she was cleaning floors, forcing her to start over.",
+    "text": "According to Steen’s testimony, his mother was not subjected to physical abuse in Theresienstadt. In addition to childcare duties, she was assigned to factory work, producing insulation material for airplanes from Mica. On one occasion, after telling a soldier that she was faring poorly following her husband’s death from malnutrition, the soldier returned each day for eight days, compelling her to state that her husband had died of pneumonia. On a separate occasion, a guard deliberately pushed over a bucket of dirty water while she was cleaning floors, forcing her to start over.",
     "location": "Theresienstadt, Czechoslovakia",
     "time": "1935 - 1943",
     "data": [
@@ -299,24 +299,13 @@
     ]
   },
   "whitebus": {
-    "title": "Happier Times",
-    "subtitle": "Liberation by the White Buses",
+    "title": "Liberation by the White Buses",
+    "shorttitle": "White Buses",
+    "subtitle": "Happier Times",
     "text": "In April 1945, a few weeks before the end of the war, prisoners in Theresienstadt heard rumours that the White Buses were on their way from Sweden to liberate the Danish Jews. Although Sweden was a neutral country, the White Buses arrived there safely three days later, on 18 April. It was a miracle that they had been able to travel through Germany unharmed.\n\nClick on the interactive objects in the drawing to find out more.",
     "location": "Theresienstadt, Czechoslovakia",
     "time": "15 April 1945",
     "audio": "buses_liberation.mp3",
-    "map": {
-      "title": "From Theresienstadt to Sweden with the borders of 1938.",
-      "mapyear": 1938,
-      "start": {
-        "lat": 50.51061972769558,
-        "lon": 14.149830134701624
-      },
-      "end": {
-        "lat": 55.605,
-        "lon": 12.997
-      }
-    },
     "data": [
       {
         "image": "/images/data/whitebussesBack.jpg",
@@ -331,8 +320,8 @@
     ]
   },
   "whitebus_x5F_group": {
-    "title": "Happier Times",
-    "subtitle": "Liberation by the White Buses",
+    "title": "Liberation by the White Buses",
+    "subtitle": "The Roads through Germany",
     "text": "The White Buses rescued approximately 425 surviving Danish Jews. Before departure, eight young Danish men married women from other countries so that they could also be liberated. Among those who left were four babies who had been born in the camp in secret. On the way back, the White Buses had to make several stops in Germany.\n\nquote(I remember looking outside while in the bus and drawing back the curtain, which I was not supposed to do. I saw some very young soldiers!)",
     "location": "Theresienstadt, Czechoslovakia",
     "time": "15 April 1945",
@@ -347,11 +336,23 @@
         "caption": "The White Busses after their arrival in Denmark.",
         "copyright": " Danish Red Cross."
       }
-    ]
+    ],
+    "map": {
+      "title": "From Theresienstadt to the Danish border with the borders of 1938.",
+      "mapyear": 1938,
+      "start": {
+        "lat": 50.51061972769558,
+        "lon": 14.149830134701624
+      },
+      "end": {
+        "lat": 54.805063190634655,
+        "lon": 9.329378684046349
+      }
+    }
   },
   "crowd_x5F_group": {
-    "title": "Happier Times",
-    "subtitle": "Liberation by the White Buses",
+    "title": "Liberation by the White Buses",
+    "subtitle": "The Ways through Denmark",
     "text": "When the White Buses reached the Danish border on 17 April, Denmark was still under occupation. Nonetheless, the rescued Jews were greeted with flowers, candy, snacks, and sandwiches. Continuing through Denmark, the former prisoners took the ferry from the Copenhagen port to Malmö, Sweden, where the liberated prisoners were quarantined for two weeks in either Tylösand or Strangnæs.",
     "location": "Denmark",
     "time": "17 April 1945",
@@ -366,7 +367,19 @@
         "caption": "Transport of Danish Jews from Theresienstadt with a stop in Haderslev.",
         "copyright": " The Museum of Danish Resistance (Frihedsmuseet)."
       }
-    ]
+    ],
+    "map": {
+      "title": "From the Danish border to Malmö with the borders of 1938.",
+      "mapyear": 1938,
+      "start": {
+        "lat": 54.805063190634655,
+        "lon": 9.329378684046349
+      },
+      "end": {
+        "lat": 55.6025,
+        "lon": 13.000833
+      }
+    }
   },
   "modelcamp": {
     "title": "The Model Camp",
@@ -404,7 +417,7 @@
       },
       "end": {
         "lat": 55.403756,
-        "lon": 10.402370
+        "lon": 10.40237
       }
     }
   },
