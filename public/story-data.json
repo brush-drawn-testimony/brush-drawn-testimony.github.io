@@ -265,8 +265,8 @@
     "data": [
       {
         "image": "/images/data/soccer_childrenbarrack.avif",
-        "caption": "text",
-        "copyright": null
+        "caption": "Photo of a street in Theresienstadt near the childrens' barracks, made during the visit of the International Delegation of the Red Cross.",
+        "copyright": " ICRC - International Committee of the Red Cross"
       }
     ]
   },
@@ -287,13 +287,13 @@
     "data": [
       {
         "image": "/images/data/soccer_propaganda.avif",
-        "caption": "A painting depicting the main entrance gate to the Theresienstadt ghetto in the Czech Republic and forced labourers with tools returning from work. Painted by Edvard Neugebauer on August 28, 1943.",
-        "copyright": null
+        "caption": "Children playing in a park in Theresienstadt, propaganda photo made during the visit of the International Delegation of the Red Cross.",
+        "copyright": " ICRC - International Committee of the Red Cross"
       },
       {
         "image": "/images/data/soccer_sketch.jpeg",
-        "caption": "text",
-        "copyright": null
+        "caption": "Initial sketch of the soccer scene.",
+        "copyright": " MEMORISE project. Illustration: Anouk Stevens."
       }
     ]
   },
