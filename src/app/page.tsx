@@ -259,7 +259,7 @@ function MainMenu() {
             {storyData != null && (
               <div className={`size-full text-gray-950 relative transition-all ${dataView ? 'bg-gray-300 border-l border-gray-400' : ''}`}>
                 <div className="absolute top-0 left-0 size-full overflow-hidden overflow-y-scroll flex items-center">
-                  {story.data != null &&
+                  {/*                   {story.data != null &&
                     <button
                       type="button"
                       role="switch"
@@ -280,7 +280,7 @@ function MainMenu() {
                           data
                         </div>
                       </div>
-                    </button>}
+                    </button>} */}
                   <div className="w-full max-h-full flex gap-2 flex-col p-3 px-6">
                     {renderContent(story, dataView)}
                   </div>
