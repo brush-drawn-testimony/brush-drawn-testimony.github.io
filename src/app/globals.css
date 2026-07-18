@@ -354,3 +354,40 @@ input:checked + .slider:before {
     filter: none;
   }
 }
+
+@keyframes tutorial-draw-arrow {
+  from {
+    stroke-dashoffset: 1;
+  }
+  to {
+    stroke-dashoffset: 0;
+  }
+}
+
+@keyframes tutorial-highlight-pulse {
+  0%,
+  100% {
+    stroke-opacity: 0.55;
+  }
+  50% {
+    stroke-opacity: 1;
+  }
+}
+
+.tutorial-arrow {
+  stroke-dasharray: 1;
+  stroke-dashoffset: 1;
+  animation: tutorial-draw-arrow 0.8s ease-out forwards;
+}
+
+.tutorial-highlight {
+  animation: tutorial-highlight-pulse 1.8s ease-in-out infinite;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .tutorial-arrow,
+  .tutorial-highlight {
+    animation: none;
+    stroke-dashoffset: 0;
+  }
+}
