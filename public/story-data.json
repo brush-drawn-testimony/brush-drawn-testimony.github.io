@@ -184,6 +184,11 @@
         "image": "/images/data/barracks.jpg",
         "caption": "Reconstruction of Barracks.",
         "copyright": " Terezín Memorial"
+      },
+      {
+        "image": "/images/data/living_barracks.jpg",
+        "caption": "A watercolor painting created by Zdenka Eismannova while she was interned in Theresienstadt depicting women resting on the bunk beds of a crowded barrack.",
+        "copyright": " United States Holocaust Memorial Museum. Provenance: Ron Neulinger"
       }
     ]
   },
