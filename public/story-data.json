@@ -192,14 +192,7 @@
     "subtitle": "Mica Production",
     "text": "According to Steen’s testimony, his mother was not subjected to physical abuse in Theresienstadt. In addition to childcare duties, she was assigned to factory work, producing insulation material for airplanes from Mica. On one occasion, after telling a soldier that she was faring poorly following her husband’s death from malnutrition, the soldier returned each day for eight days, compelling her to state that her husband had died of pneumonia. On a separate occasion, a guard deliberately pushed over a bucket of dirty water while she was cleaning floors, forcing her to start over.",
     "location": "Theresienstadt, Czechoslovakia",
-    "time": "1935 - 1943",
-    "data": [
-      {
-        "image": "/images/data/forcedLabour.jpg",
-        "caption": "Forced Labour in Theresienstadt.",
-        "copyright": " United States Holocaust Memorial Museum"
-      }
-    ]
+    "time": "1935 - 1943"
   },
   "post_x5F_group": {
     "title": "Forced Labour",
@@ -236,6 +229,11 @@
         "copyright": " Montreal Holocaust Museum. Photo: Peter Berra."
       },
       {
+        "image": "/images/data/forcedLabour.jpg",
+        "caption": "Forced Labour in Theresienstadt.",
+        "copyright": " United States Holocaust Memorial Museum"
+      },
+      {
         "image": "/images/data/infirmary_forcedlabour.jpg",
         "caption": "Jews at forced labor, putting up fences beside barracks buildings in the Theresienstadt ghetto.",
         "copyright": " Photo Archive, Ghetto Fighters' House Museum Archive, catalogue no. 15656."
@@ -255,7 +253,24 @@
     "subtitle": "Life in Theresienstadt",
     "text": "Steen was only nine years old when he was held at Theresienstadt. Amid queuing for food and delivering messages in the camp, he found moments of friendship and childhood while playing soccer. In his testimony, Steen recalled that these were the only moments in which he felt closest to being a nine-year-old boy.",
     "location": "Theresienstadt, Czechoslovakia",
-    "time": "1943 - 1945"
+    "time": "1943 - 1945",
+    "data": [
+      {
+        "image": "/images/data/soccer_childrenbarrack.avif",
+        "caption": "Photo of a street in Theresienstadt near the childrens' barracks, made during the visit of the International Delegation of the Red Cross.",
+        "copyright": " ICRC - International Committee of the Red Cross"
+      },
+      {
+        "image": "/images/data/soccer_propaganda.avif",
+        "caption": "Children playing in a park in Theresienstadt, propaganda photo made during the visit of the International Delegation of the Red Cross.",
+        "copyright": " ICRC - International Committee of the Red Cross"
+      },
+      {
+        "image": "/images/data/soccer_sketch.jpeg",
+        "caption": "Initial sketch of the soccer scene.",
+        "copyright": " MEMORISE project. Illustration: Anouk Stevens."
+      }
+    ]
   },
   "ball_x5F_group": {
     "title": "The Soccer Field",
