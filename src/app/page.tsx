@@ -46,9 +46,12 @@ function renderStoryParagraph(text: string, paragraphIndex: number) {
     }
 
     parts.push(
-      <div className="w-full flex flex-row gap-3 items-center">
+      <div
+        key={`story-quote-${paragraphIndex}-${match.index}`}
+        className="w-full flex flex-row gap-3 items-center"
+      >
         {getSteenPortrait()}
-        <span className="italic" key={`story-quote-${paragraphIndex}-${match.index}`}>
+        <span className="italic">
           "{match[1]}"
         </span>
       </div>
@@ -66,9 +69,9 @@ function renderStoryParagraph(text: string, paragraphIndex: number) {
 
 function renderStoryText(text: string) {
   return text.split("\n").map((paragraph, i) => (
-    <p key={`story-text-${i}`}>
+    <div key={`story-text-${i}`}>
       {renderStoryParagraph(paragraph, i)}
-    </p>
+    </div>
   ));
 }
 
@@ -189,7 +192,7 @@ function MainMenu() {
       </div>
       {dataView && story.data != null ?
         <>
-          {story.data.map((e: any) => <div className="border-black border-0">
+          {story.data.map((e: any, i: number) => <div key={`story-data-${i}`} className="border-black border-0">
             {e.image && <div className="flex items-center cursor-zoom-in mb-1">
               <img onClick={() => { setFocusData(e) }} className="w-full z-50" src={e.image} />
             </div>}
@@ -310,31 +313,6 @@ function MainMenu() {
                     {renderContent(story, dataView, painting.inactive, selectedGroup)}
                   </div>
                 </div>
-                <svg className="size-full absolute top-0 left-0 pointer-events-none">
-                  <filter id="roughpaper-sidebar">
-                    <feTurbulence
-                      type="fractalNoise"
-                      baseFrequency="0.04"
-                      result="noise"
-                      numOctaves="5"
-                    />
-
-                    <feDiffuseLighting
-                      in="noise"
-                      lightingColor="#fff"
-                      surfaceScale="2"
-                    >
-                      <feDistantLight azimuth="45" elevation="60" />
-                    </feDiffuseLighting>
-                  </filter>
-                  <rect
-                    width={"100%"}
-                    height={"100%"}
-                    filter="url(#roughpaper-sidebar)"
-                    opacity={0.3}
-                    fill="white"
-                  />
-                </svg>
               </div>
             )}
           </div>
@@ -363,6 +341,7 @@ function MainMenu() {
         open={tutorialOpen}
         onClose={() => setTutorialOpen(false)}
       />
+      <div className="painting-paper-overlay absolute inset-0 pointer-events-none" />
     </div>
   );
 }
