@@ -124,19 +124,24 @@
     },
     "data": [
       {
+        "image": "/images/data/transport_document.jpg",
+        "caption": "Transportation document of Steen Axel Metz. 54 was the number given to Steen, XXV/I refers to the first transport of Danish Jews to Theresienstadt.",
+        "copyright": " Arolsen Archives."
+      },
+      {
         "image": "/images/data/arrival.jpg",
-        "caption": "Theresienstadt-Bauschowitz train station during WWI",
-        "copyright": " Zdeněk Fořt"
+        "caption": "Theresienstadt-Bauschowitz train station during WWI.",
+        "copyright": " Zdeněk Fořt."
       },
       {
         "image": "/images/data/arrival2.jpg",
-        "caption": "Arrival of Jews in Theresienstadt",
+        "caption": "Arrival of Jews in Theresienstadt.",
         "copyright": " United States Holocaust Memorial Museum."
       },
       {
         "image": "/images/data/trainstation.jpg",
         "caption": "Postcard of the Theresienstadt-Bauschowitz train station in 1907, where prisoners would arrive before the construction of a station in Theresienstadt.",
-        "copyright": " Zdeněk Fořt"
+        "copyright": " Zdeněk Fořt."
       }
     ]
   },
@@ -163,7 +168,7 @@
     "data": [
       {
         "image": "/images/data/roof.jpg",
-        "caption": "Roof of Theresienstadt-Bauschowitz Train Station",
+        "caption": "Roof of Theresienstadt-Bauschowitz Train Station.",
         "copyright": " United States Holocaust Memorial Museum. Provenance: Ivan Vojtech Fric."
       }
     ]
@@ -178,17 +183,17 @@
       {
         "image": "/images/data/barracks2.jpg",
         "caption": "Picture of Barracks.",
-        "copyright": " Photo Archive Terezín Memorial"
+        "copyright": " Photo Archive Terezín Memorial."
       },
       {
         "image": "/images/data/barracks.jpg",
         "caption": "Reconstruction of Barracks.",
-        "copyright": " Terezín Memorial"
+        "copyright": " Terezín Memorial."
       },
       {
         "image": "/images/data/living_barracks.jpg",
         "caption": "A watercolor painting created by Zdenka Eismannova while she was interned in Theresienstadt depicting women resting on the bunk beds of a crowded barrack.",
-        "copyright": " United States Holocaust Memorial Museum. Provenance: Ron Neulinger"
+        "copyright": " United States Holocaust Memorial Museum. Provenance: Ron Neulinger."
       }
     ]
   },
@@ -197,7 +202,14 @@
     "subtitle": "Mica Production",
     "text": "According to Steen’s testimony, his mother was not subjected to physical abuse in Theresienstadt. In addition to childcare duties, she was assigned to factory work, producing insulation material for airplanes from Mica. On one occasion, after telling a soldier that she was faring poorly following her husband’s death from malnutrition, the soldier returned each day for eight days, compelling her to state that her husband had died of pneumonia. On a separate occasion, a guard deliberately pushed over a bucket of dirty water while she was cleaning floors, forcing her to start over.",
     "location": "Theresienstadt, Czechoslovakia",
-    "time": "1935 - 1943"
+    "time": "1935 - 1943",
+    "data": [
+      {
+        "image": "/images/data/labour_mica.jpg",
+        "caption": "Two pieces of mica saved by Ilse Silten, a forced laborer in a glimmer factory." ,
+        "copyright": " United States Holocaust Memorial Museum."
+      }
+    ]
   },
   "post_x5F_group": {
     "title": "Forced Labour",
@@ -236,7 +248,7 @@
       {
         "image": "/images/data/forcedLabour.jpg",
         "caption": "Forced Labour in Theresienstadt.",
-        "copyright": " United States Holocaust Memorial Museum"
+        "copyright": " United States Holocaust Memorial Museum."
       },
       {
         "image": "/images/data/infirmary_forcedlabour.jpg",
@@ -355,7 +367,12 @@
         "image": "/images/data/whitebusses2.jpg",
         "caption": "The White Busses after their arrival in Denmark.",
         "copyright": " Danish Red Cross."
-      }
+      },
+      {
+        "image": "/images/data/buses_document.jpg",
+        "caption": "Lists of released Jews from Theresienstadt who arrived in Sweden.",
+        "copyright": " Arolsen Archives."
+      } 
     ],
     "map": {
       "title": "From Theresienstadt to the Danish border with the borders of 1938.",
