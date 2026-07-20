@@ -55,7 +55,7 @@ export function ThumbnailPainting(props: ThumbnailPaintingProps) {
 
   return (
     <div
-      className={`size-12 rounded-full overflow-hidden bg-slate-50 relative cursor-pointer shadow-md items-center ${borderSyle
+      className={`safari-rounded-clip size-12 rounded-full overflow-hidden bg-slate-50 relative cursor-pointer shadow-md items-center ${borderSyle
         } hover:border-gray-500`}
       key={`timeline-sub-entry-${elementID}`}
       onClick={(e) => {
