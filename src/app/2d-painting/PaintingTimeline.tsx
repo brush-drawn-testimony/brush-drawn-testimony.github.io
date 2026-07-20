@@ -1,5 +1,5 @@
 "use client";
-import { useEffect, useMemo, useRef, useState } from "react";
+import { Fragment, useEffect, useMemo, useRef, useState } from "react";
 import SVG from "react-inlinesvg";
 import Image from "next/image";
 import { useDispatch, useSelector } from "react-redux";
@@ -130,27 +130,6 @@ export function PaintingTimeline(props: PaintingTimelineProps) {
 
   return (
     <div className="size-full items-center grid grid-cols-[64px_auto_64px] gap-2 border-t border-gray-300 relative">
-      <svg className="size-full absolute top-0 left-0 pointer-events-none">
-        <filter id="roughpaper-timeline">
-          <feTurbulence
-            type="fractalNoise"
-            baseFrequency="0.04"
-            result="noise"
-            numOctaves="5"
-          />
-
-          <feDiffuseLighting in="noise" lightingColor="#fff" surfaceScale="2">
-            <feDistantLight azimuth="45" elevation="60" />
-          </feDiffuseLighting>
-        </filter>
-        <rect
-          width={"100%"}
-          height={"100%"}
-          filter="url(#roughpaper-timeline)"
-          opacity={0.3}
-          fill="white"
-        />
-      </svg>
       {canNavigatePrevious && (
         <div
           className="rounded-full px-2 size-16 shadow hover:shadow-lg hover:bg-gray-400 hover:text-white cursor-pointer items-center justify-center flex"
@@ -171,8 +150,21 @@ export function PaintingTimeline(props: PaintingTimelineProps) {
         {paintings.map((e, i) => {
           const story = storyData ? storyData[e.key] ?? null : null;
           const paintingDiscovered = discoveredStoryKeys.includes(e.key);
+          const previousPaintingDiscovered =
+            i < paintings.length - 1 && discoveredStoryKeys.includes(paintings[i + 1].key);
+          const connectingLineDiscovered =
+            paintingDiscovered && previousPaintingDiscovered;
+          let borderStyle = "border-3 border-transparent";
+
+          if (paintingDiscovered) {
+            borderStyle = "border-3 border-gray-400"
+          }
+          if (selectedPainting === i && selectedGroup == null) {
+            borderStyle = "border-3 border-gray-600"
+          }
+
           return (
-            <>
+            <Fragment key={`fragment-${e.key}`}>
               <div
                 key={`timeline-title-${i}`}
                 className={`text-xs row-start-1 py-1 ${noto_serif.className}`}
@@ -185,15 +177,12 @@ export function PaintingTimeline(props: PaintingTimelineProps) {
               >
                 <div className="absolute top-0 left-0 w-full h-full flex items-center">
                   <div
-                    className={`h-1 mt-[4px] w-full ${i < selectedPainting ? "bg-gray-400" : "bg-gray-200"
+                    className={`h-1 mt-[4px] w-full ${connectingLineDiscovered ? "bg-gray-400" : "bg-gray-200"
                       }`}
                   ></div>
                 </div>
                 <div
-                  className={`size-18 rounded-full overflow-hidden relative cursor-pointer shadow-md items-center bg-white ${paintingDiscovered || (selectedPainting === i && selectedGroup == null)
-                    ? "border-3 border-gray-400"
-                    : ""
-                    }`}
+                  className={`safari-rounded-clip size-18 rounded-full overflow-hidden relative cursor-pointer shadow-md items-center bg-white ${borderStyle} hover:border-gray-500`}
                   key={`timeline-entry-${i}`}
                   onClick={() => {
                     dispatch(setSelectedGroup(null));
@@ -201,71 +190,36 @@ export function PaintingTimeline(props: PaintingTimelineProps) {
                   }}
                   ref={svgRef}
                 >
-                  <SVG
-                    src={e.svgFile}
-                    className="size-full object-contain absolute timeline-painting-svg"
-                    // style={{
-                    //   backgroundImage: "url('/assets/paper-texture.jpg')",
-                    // }}
-                    preProcessor={(code) => {
-                      const timelineKey = i.toString();
-                      const discoveredElements = Object.keys(storyData).filter(
-                        (element) => code.includes(`id="${element}"`)
-                      );
+                  <div className="size-full absolute timeline-painting-shadow">
+                    <SVG
+                      src={e.svgFile}
+                      className="size-full object-contain"
+                      preProcessor={(code) => {
+                        const timelineKey = i.toString();
+                        const discoveredElements = Object.keys(storyData).filter(
+                          (element) => code.includes(`id="${element}"`)
+                        );
 
-                      setInteractiveElements((currentElements) => {
-                        if (
-                          sameElements(
-                            currentElements[timelineKey],
-                            discoveredElements
-                          )
-                        ) {
-                          return currentElements;
-                        }
+                        setInteractiveElements((currentElements) => {
+                          if (
+                            sameElements(
+                              currentElements[timelineKey],
+                              discoveredElements
+                            )
+                          ) {
+                            return currentElements;
+                          }
 
-                        return {
-                          ...currentElements,
-                          [timelineKey]: discoveredElements,
-                        };
-                      });
+                          return {
+                            ...currentElements,
+                            [timelineKey]: discoveredElements,
+                          };
+                        });
 
-                      let newCode = code.replaceAll(
-                        '_image"',
-                        '_image" class="mythumbnailimage"'
-                      );
-
-                      newCode = newCode.replaceAll(
-                        'background"',
-                        'background" class="mybackground"'
-                      );
-                      return newCode.replaceAll('id="', `id="timeline-${i}`);
-                    }}
-                  />
-                  <svg className="size-full absolute top-0 left-0">
-                    <filter id={`timeline-roughpaper-${i}`}>
-                      <feTurbulence
-                        type="fractalNoise"
-                        baseFrequency="0.04"
-                        result="noise"
-                        numOctaves="5"
-                      />
-
-                      <feDiffuseLighting
-                        in="noise"
-                        lightingColor="#fff"
-                        surfaceScale="2"
-                      >
-                        <feDistantLight azimuth="45" elevation="60" />
-                      </feDiffuseLighting>
-                    </filter>
-                    <rect
-                      width={"100%"}
-                      height={"100%"}
-                      filter="url(#roughpaper-sidebar)"
-                      opacity={0.3}
-                      fill="white"
+                        return code.replaceAll('id="', `id="timeline-${i}`);
+                      }}
                     />
-                  </svg>
+                  </div>
                 </div>
                 {selectedPainting === i &&
                   interactiveElements[i.toString()] != null &&
@@ -284,7 +238,7 @@ export function PaintingTimeline(props: PaintingTimelineProps) {
               >
                 {story?.time}
               </div>
-            </>
+            </Fragment>
           );
         })}
       </div>
